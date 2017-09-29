@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AttendU.iml" filepath="$PROJECT_DIR$/AttendU.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/attendu2/attendu2.iml" filepath="$PROJECT_DIR$/attendu2/attendu2.iml" />
     </modules>
   </component>
 </project>
