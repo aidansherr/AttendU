@@ -20,7 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_sign_in_pin" />
+    <include layout="@layout/content_sign_in_pin"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
