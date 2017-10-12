@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class ProfMain extends AppCompatActivity {
+public class ProfMain extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        BasicUser user = new BasicUser();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prof_main);
     }
