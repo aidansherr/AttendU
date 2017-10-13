@@ -1,35 +1,52 @@
 
 package com.snhu.attendu.attendu;
+
+import android.content.Intent;
 import java.util.List;
 import java.util.ArrayList;
+
+
+import static android.support.v4.content.ContextCompat.startActivity;
+
 /**
  * Created by Travis on 10/11/2017.
  */
 
 public class BasicUser
 {
-List<Class> classSchedule = new ArrayList<Class>();
-
-    BasicUser()
+List<Course> classSchedule = new ArrayList<Course>();
+    
+    String userName="";
+    
+    BasicUser(String userName,List<Course> courses)
     {
-        Class math=new Class("Math");
-        Class english=new Class("English");
-        Class cs= new Class("Junior lab");
+        this.userName=userName;
 
-        addClass(math);
-        addClass(english);
-        addClass(cs);
+        for(int i=0;i<courses.size();i++)
+        {
+            classSchedule.add(courses.get(i));
+        }
     }
 
 
-    List<Class> getClassList()
+    List<Course> getClassList()
     {
         return classSchedule;
     }
 
-    void addClass( Class newClass)
+    void addCourse( Course newClass)
     {
         classSchedule.add(newClass);
     }
 
+    String getUserName()
+    {
+        return userName;
+    }
+    
+    void openActivity()
+    {
+
+    }
+    
 }
