@@ -17,6 +17,8 @@ public class BasicUser
 List<Course> classSchedule = new ArrayList<Course>();
     
     String userName="";
+
+    BasicUser user=this;
     
     BasicUser(String userName,List<Course> courses)
     {

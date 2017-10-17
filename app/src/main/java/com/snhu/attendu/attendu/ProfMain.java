@@ -18,6 +18,18 @@ public class ProfMain extends AppCompatActivity
     public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,SignInPin.class);
+
+
+
         startActivity(inten);
     }
+    public void makeButtons()
+    {
+
+        for(int i=0;i<10;i++)
+        {
+
+        }
+    }
+
 }
