@@ -50,5 +50,9 @@ List<Course> classSchedule = new ArrayList<Course>();
     {
 
     }
-    
+    String getClassName(int i)
+    {
+        return classSchedule.get(i).getClassName();
+    }
+
 }

@@ -335,17 +335,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
 
-                List<Course> courses= new ArrayList<Course>();
 
-                Course math=new Course("Math");
-                Course english=new Course("English");
-                Course cs= new Course("Junior lab");
-
-                courses.add(math);
-                courses.add(english);
-                courses.add(cs);
-
-                BasicUser newUser= new BasicUser("Tyler",courses);
 
                 Intent professor = new Intent(getApplicationContext(), ProfMain.class);//switches to ProfMain
                 startActivity(professor);
