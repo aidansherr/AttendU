@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.graphics.Color;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TableRow;
@@ -69,11 +67,6 @@ public class ProfMain extends AppCompatActivity
             }
 
             });
-
-
-
-
-
             tableLayout.addView(row);
             row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.MATCH_PARENT,1.0f));
             row.addView(btn);

@@ -54,5 +54,9 @@ List<Course> classSchedule = new ArrayList<Course>();
     {
         return classSchedule.get(i).getClassName();
     }
+    BasicUser getUser()
+    {
+        return user;
+    }
 
 }
