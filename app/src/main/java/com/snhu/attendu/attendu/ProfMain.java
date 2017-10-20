@@ -17,7 +17,7 @@ import static android.R.interpolator.linear;
 public class ProfMain extends AppCompatActivity
 {
     List<Course> courses= new ArrayList<Course>();
-    BasicUser newUser;
+    Professor newUser;
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
@@ -33,7 +33,7 @@ public class ProfMain extends AppCompatActivity
         courses.add(cs);
 
 
-        newUser= new BasicUser("Tyler",courses);
+        newUser= new Professor("Tyler",courses,"P");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_prof_main);
@@ -55,7 +55,7 @@ public class ProfMain extends AppCompatActivity
             TableRow row = new TableRow(this);
             TableLayout tableLayout = (TableLayout)findViewById(R.id.TableLayout);
             Button btn= new Button(this);
-            btn.setText(newUser.getClassName(i));
+            btn.setText(newUser.getClassName(courses.get(i)));
             btn.setHeight(150);
             btn.setWidth(100);
             btn.setOnClickListener(new View.OnClickListener()
