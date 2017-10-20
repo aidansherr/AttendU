@@ -334,8 +334,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent professor = new Intent(getApplicationContext(), ProfMain.class);
+
+
+
+                Intent professor = new Intent(getApplicationContext(), ProfMain.class);//switches to ProfMain
                 startActivity(professor);
+
+
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
