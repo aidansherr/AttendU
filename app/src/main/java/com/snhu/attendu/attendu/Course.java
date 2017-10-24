@@ -8,6 +8,7 @@ package com.snhu.attendu.attendu;
 public class Course
 {
     String className="";
+    boolean isActive=false; //A variable that will determine weather the Course has been actiated by the professor or not
 
     Course(String className)
     {
