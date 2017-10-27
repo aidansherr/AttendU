@@ -22,8 +22,8 @@ public class SignInPin extends AppCompatActivity
         setSupportActionBar(toolbar);
         text= (TextView) findViewById(R.id.pinBox);
         int randomNumber=GenerateCode(); //Generates a random number using GenerateCode
-        String random= Integer.toString(randomNumber);// casts it as a string for the TextView
-        text.setText(random);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,5 +51,12 @@ public class SignInPin extends AppCompatActivity
         return Code;
 
     }
+    public void dropPin(View view)
+    {
+        int randomNumber=GenerateCode();
+        String random= Integer.toString(randomNumber);// casts it as a string for the TextView
+        text.setText(random);
+    }
+
 
 }

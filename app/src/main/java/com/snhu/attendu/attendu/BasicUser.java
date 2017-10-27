@@ -18,9 +18,12 @@ List<Course> classSchedule = new ArrayList<Course>();
     
     String userName="";
 
-    BasicUser user=this;
-    
-    BasicUser(String userName,List<Course> courses)
+    String user="";
+
+    BasicUser()
+    {}
+
+    BasicUser(String userName,List<Course> courses,String user)
     {
         this.userName=userName;
 
@@ -50,11 +53,15 @@ List<Course> classSchedule = new ArrayList<Course>();
     {
 
     }
-    String getClassName(int i)
+    String getClassName(Course course)
     {
-        return classSchedule.get(i).getClassName();
+        if (course != null) {
+            return course.getClassName();
+
+        }
+        return "";
     }
-    BasicUser getUser()
+    String getUser()
     {
         return user;
     }
