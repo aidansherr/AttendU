@@ -7,14 +7,11 @@ package com.snhu.attendu.attendu;
 //This class is to represent a physical class that a student would be taking
 public class Course
 {
-    String className="";
-
+    public
     Course(String className)
     {
         this.className=className;
     }
-
-
     String getClassName()
     {
         return className;
@@ -23,4 +20,17 @@ public class Course
     {
         className=newName;
     }
+    void setCourseAvailability(boolean available)
+    {
+        courseCheckinAvailable = available;
+    }
+    boolean getCourseAvailibility()
+    {
+        return courseCheckinAvailable;
+    }
+
+    private
+
+    String className="";
+    boolean courseCheckinAvailable = false;
 }

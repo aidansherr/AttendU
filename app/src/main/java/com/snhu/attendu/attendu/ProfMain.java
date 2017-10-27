@@ -1,6 +1,7 @@
 package com.snhu.attendu.attendu;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ProfMain extends AppCompatActivity
         courses.add(english);
         courses.add(cs);
 
+        courses.get(1).setCourseAvailability(true);
 
         newUser= new BasicUser("Tyler",courses);
         super.onCreate(savedInstanceState);
@@ -70,9 +72,10 @@ public class ProfMain extends AppCompatActivity
             tableLayout.addView(row);
             row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.MATCH_PARENT,1.0f));
             row.addView(btn);
-
-
-
+            if (courses.get(i).getCourseAvailibility() == true)
+            {
+                btn.setBackgroundColor(Color.GREEN);
+            }
         }
     }
 
