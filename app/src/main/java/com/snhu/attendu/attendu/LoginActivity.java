@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -320,7 +321,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String newUser;
         private String filePath = "userData.txt";
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password) { //Add string userlevel
             mEmail = email;
             mPassword = password;
             //Fields
@@ -380,7 +381,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                //Returns userLevel from array needs the userLevel string to work
+            //return pieces[2];
+               // Intent student = new Intent(getApplicationContext(), Student_Main.class);//switches to Student_Main
+                Intent professor = new Intent(getApplicationContext(), ProfMain.class);//switches to ProfMain
+                /*Intent Admin = new Intent(getApplicationContext(), Admin_Main.class);//switches to Admin_Main
+                Intent ITUser = new Intent(getApplicationContext(), ITUser_Main.class);//switches to ITUser_Main
+                Switch (string userLevel){
+                    case "s": startActivity(student);
+                        break;
+                    case "p": startActivity(professor);
+                        break;
+                    case "a": startActivity(Admin);
+                        break;
+                    case "i": startActivity(ITUser);
+                        break;
+                    default:
+                        break;
+                }*/
+
+                startActivity(professor);
+
+
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
