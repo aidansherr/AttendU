@@ -3,6 +3,7 @@ package com.snhu.attendu.attendu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,8 +31,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.security.MessageDigest;
+import java.security.Security;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -49,13 +62,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "test@snhu.edu:test1", "bar@example.com:world"
+            //"dan.test1@snhu.edu:ec159d78f6c5de4c7c2d5f4933ce76b9583e1022:a",
+            //"prof.test@snhu.edu:94dcc9b1e739b7ca13d0e390d3d719ddaa223156:p",
+            //"Tom.Brady@snhu.edu:b240a280af5b8e08ca06917dae3fd0f1a7fae49b:s",
+            // "tyler@snhu.edu:41589fdd0f4220c50eab22259d45629b5bb0848f:i"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
 
+    private static Context context;
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -65,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LoginActivity.context = getApplicationContext();
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -191,13 +210,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        //Username must be snhu email account and have a name before it
+        return (email.endsWith("@snhu.edu")) && (email.length() > 9);
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        //Password must contain 8 characters, contain a capitol letter, and a number
+        return (password.length() >= 8) && (!password.equals(password.toLowerCase()) && (password.matches(".*\\d+.*")));
     }
 
     /**
@@ -298,10 +317,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private final String newUser;
+        private String filePath = "userData.txt";
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            //Fields
+            //username:password:s     where s is default student profile type.
+            newUser = (mEmail + ":" + mPassword + ":s" + "/n");
         }
 
         @Override
@@ -314,16 +338,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } catch (InterruptedException e) {
                 return false;
             }
-
+            // TODO: Check users credentials from database
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                    PasswordDigest pd = new PasswordDigest();
+                    return pieces[1].equals(pd.encryptPassword(mPassword));
                 }
             }
 
+            //DEBUG to find out encrypted password
+            Log.d("TEST", "The entered password: " + mPassword);
+
             // TODO: register the new account here.
+            //Consider something else
+            try{
+                PasswordDigest pd = new PasswordDigest();
+                pd.encryptPassword(mPassword);
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                writer.write(newUser);
+                writer.close();
+
+            } catch (IOException e){
+                System.err.format("IOException: %s%n", e);
+            }
+//            try{
+//                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("testUsers.txt", Context.MODE_PRIVATE));
+//                outputStreamWriter.write((mEmail + ":" + mPassword + "/n"));
+//                outputStreamWriter.close();
+//            }
+//            catch(IOException e){
+//                Log.e("Exception", "File write failed: " + e.toString());
+//            }
             return true;
         }
 
@@ -348,3 +395,4 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 }
 
+//
