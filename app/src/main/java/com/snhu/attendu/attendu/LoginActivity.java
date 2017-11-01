@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    public static String UserLevel;
+    public String UserLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -345,16 +345,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
                     PasswordDigest pd = new PasswordDigest();
-                    return pieces[1].equals(pd.encryptPassword(mPassword));
-
+                    //return pieces[1].equals(pd.encryptPassword(mPassword));
+                    if(pieces[1].equals(pd.encryptPassword(mPassword)))
+                    {
+                        UserLevel=pieces[2];
+                        return true;
+                    }
 
 
 
                 }
-                if(pieces[1].equals(mPassword))
-                {
-                    pieces[2] = UserLevel;
-                }
+
+
 
             }
 
@@ -408,7 +410,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             break;
                         case "i": startActivity(ITUser);
                             break;
-                        default:startActivity(Student);
+                        default:
                             break;
                     }
 
