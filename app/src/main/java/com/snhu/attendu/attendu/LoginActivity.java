@@ -321,7 +321,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String newUser;
         private String filePath = "userData.txt";
 
-        UserLoginTask(String email, String password) { //Add string userlevel
+        UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
             //Fields
@@ -382,12 +382,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 //Returns userLevel from array needs the userLevel string to work
-            //return pieces[2];
-               // Intent student = new Intent(getApplicationContext(), Student_Main.class);//switches to Student_Main
+                for (String credential : DUMMY_CREDENTIALS) {
+                    String[] pieces = credential.split(":");
+
+                        pieces[2].equals(newUser);
+
+
+                }
+                Intent student = new Intent(getApplicationContext(), Student_Main.class);//switches to Student_Main
                 Intent professor = new Intent(getApplicationContext(), ProfMain.class);//switches to ProfMain
-                /*Intent Admin = new Intent(getApplicationContext(), Admin_Main.class);//switches to Admin_Main
+                Intent Admin = new Intent(getApplicationContext(), Admin_Main.class);//switches to Admin_Main
                 Intent ITUser = new Intent(getApplicationContext(), ITUser_Main.class);//switches to ITUser_Main
-                Switch (string userLevel){
+                switch (newUser)
+                {
                     case "s": startActivity(student);
                         break;
                     case "p": startActivity(professor);
@@ -398,7 +405,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         break;
                     default:
                         break;
-                }*/
+                }
 
                 startActivity(professor);
 
