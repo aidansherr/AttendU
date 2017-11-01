@@ -63,11 +63,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "test@snhu.edu:test1", "bar@example.com:world"
-            //"dan.test1@snhu.edu:ec159d78f6c5de4c7c2d5f4933ce76b9583e1022:a",
-            //"prof.test@snhu.edu:94dcc9b1e739b7ca13d0e390d3d719ddaa223156:p",
-            //"Tom.Brady@snhu.edu:b240a280af5b8e08ca06917dae3fd0f1a7fae49b:s",
-            // "tyler@snhu.edu:41589fdd0f4220c50eab22259d45629b5bb0848f:i"
+            "dan.test1@snhu.edu:ec159d78f6c5de4c7c2d5f4933ce76b9583e1022:a",
+            "prof.test@snhu.edu:94dcc9b1e739b7ca13d0e390d3d719ddaa223156:p",
+            "Tom.Brady@snhu.edu:b240a280af5b8e08ca06917dae3fd0f1a7fae49b:s",
+            "tyler@snhu.edu:41589fdd0f4220c50eab22259d45629b5bb0848f:i"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -80,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    public static String UserLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -346,7 +346,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Account exists, return true if the password matches.
                     PasswordDigest pd = new PasswordDigest();
                     return pieces[1].equals(pd.encryptPassword(mPassword));
+
+
+
+
                 }
+                if(pieces[1].equals(mPassword))
+                {
+                    pieces[2] = UserLevel;
+                }
+
             }
 
             //DEBUG to find out encrypted password
@@ -380,31 +389,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
+
+            Intent Student = new Intent(getApplicationContext(), StudentMain.class);//switches to Student_Main
+            Intent Professor = new Intent(getApplicationContext(),ProfMain.class);//switches to ProfMain
+            Intent Admin = new Intent(getApplicationContext(),AdminMain.class);//switches to Admin_Main
+            Intent ITUser = new Intent(getApplicationContext(), ITUserMain.class);//switches to ITUser_Main
             if (success) {
                 //Returns userLevel from array needs the userLevel string to work
-                for (String credential : DUMMY_CREDENTIALS) {
-                    String[] pieces = credential.split(":");
 
-                    String UserLevel = pieces[2];
 
-                    Intent student = new Intent(getApplicationContext(), Student_Main.class);//switches to Student_Main
-                    Intent professor = new Intent(getApplicationContext(), ProfMain.class);//switches to ProfMain
-                    Intent Admin = new Intent(getApplicationContext(), Admin_Main.class);//switches to Admin_Main
-                    Intent ITUser = new Intent(getApplicationContext(), ITUser_Main.class);//switches to ITUser_Main
                     switch (UserLevel)
                     {
-                        case "s": startActivity(student);
+                        case "s": startActivity(Student);
                             break;
-                        case "p": startActivity(professor);
+                        case "p": startActivity(Professor);
                             break;
                         case "a": startActivity(Admin);
                             break;
                         case "i": startActivity(ITUser);
                             break;
-                        default:
+                        default:startActivity(Student);
                             break;
                     }
-                }
+
 
 
 

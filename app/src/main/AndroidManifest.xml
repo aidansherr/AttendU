@@ -27,7 +27,10 @@
         <activity
             android:name=".SignInPin"
             android:label="@string/title_activity_sign_in_pin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".StudentMain" />
+        <activity android:name=".AdminMain" />
+        <activity android:name=".ITUserMain"></activity>
     </application>
 
 </manifest>
