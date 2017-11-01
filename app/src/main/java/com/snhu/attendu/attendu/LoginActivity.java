@@ -385,29 +385,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 for (String credential : DUMMY_CREDENTIALS) {
                     String[] pieces = credential.split(":");
 
-                        pieces[2].equals(newUser);
+                    String UserLevel = pieces[2];
 
-
+                    Intent student = new Intent(getApplicationContext(), Student_Main.class);//switches to Student_Main
+                    Intent professor = new Intent(getApplicationContext(), ProfMain.class);//switches to ProfMain
+                    Intent Admin = new Intent(getApplicationContext(), Admin_Main.class);//switches to Admin_Main
+                    Intent ITUser = new Intent(getApplicationContext(), ITUser_Main.class);//switches to ITUser_Main
+                    switch (UserLevel)
+                    {
+                        case "s": startActivity(student);
+                            break;
+                        case "p": startActivity(professor);
+                            break;
+                        case "a": startActivity(Admin);
+                            break;
+                        case "i": startActivity(ITUser);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                Intent student = new Intent(getApplicationContext(), Student_Main.class);//switches to Student_Main
-                Intent professor = new Intent(getApplicationContext(), ProfMain.class);//switches to ProfMain
-                Intent Admin = new Intent(getApplicationContext(), Admin_Main.class);//switches to Admin_Main
-                Intent ITUser = new Intent(getApplicationContext(), ITUser_Main.class);//switches to ITUser_Main
-                switch (newUser)
-                {
-                    case "s": startActivity(student);
-                        break;
-                    case "p": startActivity(professor);
-                        break;
-                    case "a": startActivity(Admin);
-                        break;
-                    case "i": startActivity(ITUser);
-                        break;
-                    default:
-                        break;
-                }
 
-                startActivity(professor);
+
+
+
 
 
             } else {
