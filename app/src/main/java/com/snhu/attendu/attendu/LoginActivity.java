@@ -366,11 +366,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: register the new account here.
             //Consider something else
             try{
+                UserLevel = "s";
                 PasswordDigest pd = new PasswordDigest();
                 pd.encryptPassword(mPassword);
                 BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
                 writer.write(newUser);
                 writer.close();
+
 
             } catch (IOException e){
                 System.err.format("IOException: %s%n", e);
