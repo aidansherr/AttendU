@@ -377,6 +377,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             // TODO: register the new account here.
             //Consider something else
+            UserLevel = "s";
             PasswordDigest pd = new PasswordDigest();
             newUser = (mEmail + ":" + pd.encryptPassword(mPassword) + ":s" + "/n");
            // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
