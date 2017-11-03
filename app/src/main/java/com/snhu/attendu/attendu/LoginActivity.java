@@ -377,12 +377,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             // TODO: register the new account here.
             //Consider something else
+<<<<<<< HEAD
             PasswordDigest pd = new PasswordDigest();
             newUser = (mEmail + ":" + pd.encryptPassword(mPassword) + ":s" + "/n");
            // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("user", newUser);
             editor.apply();
+=======
+            try{
+                PasswordDigest pd = new PasswordDigest();
+                pd.encryptPassword(mPassword);
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+                writer.write(newUser);
+                writer.close();
+
+            } catch (IOException e){
+                System.err.format("IOException: %s%n", e);
+            }
+>>>>>>> parent of 10684be... Added user pages for specific level as well as identifying userlevel on login
 //            try{
 //                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("testUsers.txt", Context.MODE_PRIVATE));
 //                outputStreamWriter.write((mEmail + ":" + mPassword + "/n"));
