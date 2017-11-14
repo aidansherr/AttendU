@@ -52,13 +52,13 @@ public class SignInPin extends AppCompatActivity
         return Code;
 
     }
-    public void dropPin(View view)
+    public void dropPin(final View view)
     {
         int randomNumber=GenerateCode();
         String random= Integer.toString(randomNumber);// casts it as a string for the TextView
         text.setText(random);
 
-        CountDownTimer timer= new CountDownTimer(1000,100)
+        CountDownTimer timer= new CountDownTimer(1800000,1)
         {
             @Override
             public void onTick(long millisUntilFinished)
@@ -69,6 +69,7 @@ public class SignInPin extends AppCompatActivity
             @Override
             public void onFinish()
             {
+                goBack(view);
                 //Put in code to remove class pin
             }
         }.start();
