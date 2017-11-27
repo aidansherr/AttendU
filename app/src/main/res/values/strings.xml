@@ -16,4 +16,5 @@
     <string name="title_activity_pin_page">PinPage</string>
     <string name="title_activity_sign_in_pin">SignInPin</string>
     <string name="title_activity_sign_in_page">SignInPage</string>
+    <string name="title_activity_sign_in_maps">Map</string>
 </resources>

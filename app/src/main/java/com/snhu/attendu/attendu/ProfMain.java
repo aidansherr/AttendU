@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import static android.R.interpolator.linear;
 
 public class ProfMain extends AppCompatActivity
@@ -43,7 +45,7 @@ public class ProfMain extends AppCompatActivity
     }
     public void openPinWindow(View view)
     {
-        Intent inten= new Intent(this,SignInPin.class);
+        Intent inten= new Intent(this,SignInMapsActivity.class);
         startActivity(inten);
     }
 
