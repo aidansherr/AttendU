@@ -43,7 +43,8 @@ public class Course
     {
         CodeCheck code = new CodeCheck();
         SignInPin Pin = new SignInPin();
-        String random = Integer.toString(Pin.GenerateCode());
+        //String random = Integer.toString(Pin.GenerateCode());
+        String random = "12345";
 
         if(random.equals(code.userPinCode))
         {
