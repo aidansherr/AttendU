@@ -33,4 +33,26 @@ public class Course
 
     String className="";
     boolean courseCheckinAvailable = false;
+
+
+
+    boolean codeCheck = false;
+
+
+    public void checkPin()
+    {
+        CodeCheck code = new CodeCheck();
+        SignInPin Pin = new SignInPin();
+        String random = Integer.toString(Pin.GenerateCode());
+
+        if(random.equals(code.userPinCode))
+        {
+            codeCheck = true;
+            code.userCheck.setChecked(true);
+        }
+        else
+        {
+            //output that the pin did not match professor pin
+        }
+    }
 }

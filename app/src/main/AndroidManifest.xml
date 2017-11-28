@@ -30,7 +30,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".StudentMain" />
         <activity android:name=".AdminMain" />
-        <activity android:name=".ITUserMain"></activity>
+        <activity android:name=".ITUserMain" />
+        <activity android:name=".CodeCheck"></activity>
     </application>
 
 </manifest>
