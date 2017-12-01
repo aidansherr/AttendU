@@ -19,6 +19,7 @@ import java.util.Random;
 public class SignInMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    boolean pinDroped=false;
     TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,33 +69,33 @@ public class SignInMapsActivity extends FragmentActivity implements OnMapReadyCa
         return Code;
 
     }
-    public void dropPin(final View view)
-    {
-        int randomNumber=GenerateCode();
-        String random= Integer.toString(randomNumber);// casts it as a string for the TextView
-        text.setText(random);
-        LatLng snhu = new LatLng(43, -70);
-        mMap.addMarker(new MarkerOptions().position(snhu).title("Marker in SNHU"));
+    public void dropPin(final View view) {
+        if (!pinDroped) {
+            int randomNumber = GenerateCode();
+            String random = Integer.toString(randomNumber);// casts it as a string for the TextView
+            text.setText(random);
+            LatLng snhu = new LatLng(43, -70);
+            mMap.addMarker(new MarkerOptions().position(snhu).title("Marker in SNHU"));
+            pinDroped=true;
 
-        CountDownTimer timer= new CountDownTimer(1800000,1)
-        {
-            @Override
-            public void onTick(long millisUntilFinished)
-            {
+            CountDownTimer timer = new CountDownTimer(1800000, 1) {
+                @Override
+                public void onTick(long millisUntilFinished) {
 
-            }
+                }
 
-            @Override
-            public void onFinish()
-            {
-                goBack(view);
-                removePin(view);
-                //Put in code to remove class pin
-            }
-        }.start();
+                @Override
+                public void onFinish() {
+                    goBack(view);
+                    removePin(view);
+                    //Put in code to remove class pin
+                }
+            }.start();
+        }
     }
     public void removePin( final View view)
     {
+        pinDroped=false;
         mMap.clear();
     }
 }
