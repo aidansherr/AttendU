@@ -22,6 +22,7 @@ public class CodeCheck extends AppCompatActivity {
     boolean codeCheck = false;
 
 
+
     Course course = new Course("Pin");
 
 
@@ -37,14 +38,20 @@ Toast toast = Toast.makeText(context, text, duration);
 Toast toast2 = Toast.makeText(context,text2,duration);
 
 
+
+
         if(course.random.equals(userPinCode))
         {
             codeCheck = true;
             userCheck.setChecked(true);
             toast2.show(); //output that the user has signed in
+            classCodeInput.setEnabled(false);
+            submitButton.setEnabled(false);
         }
         else
         {
+
+
             //output that the pin did not match professor pin
             toast.show();
         }
@@ -59,11 +66,13 @@ Toast toast2 = Toast.makeText(context,text2,duration);
         classCodeInput = (EditText) findViewById(R.id.classCodeInput);
         submitButton = (Button) findViewById(R.id.submitButton);
         userCheck = (CheckBox) findViewById(R.id.checkBox);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userPinCode = classCodeInput.getText().toString();
                 checkPin();
+                classCodeInput.setText("");
 
 
 
