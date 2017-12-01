@@ -1,5 +1,6 @@
 package com.snhu.attendu.attendu;
 
+import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,24 +21,32 @@ public class CodeCheck extends AppCompatActivity {
 
     boolean codeCheck = false;
 
+
     Course course = new Course("Pin");
-   // String random = course.random;
+
 
     public void checkPin()
     {
 
 
+Context context = getApplicationContext();
+CharSequence text = "Wrong Pin Number";
+CharSequence text2 = "Successfully Checked In";
+int duration = Toast.LENGTH_SHORT;
+Toast toast = Toast.makeText(context, text, duration);
+Toast toast2 = Toast.makeText(context,text2,duration);
 
-       //String random = "12345";
 
         if(course.random.equals(userPinCode))
         {
             codeCheck = true;
             userCheck.setChecked(true);
+            toast2.show(); //output that the user has signed in
         }
         else
         {
             //output that the pin did not match professor pin
+            toast.show();
         }
     }
 

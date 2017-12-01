@@ -31,7 +31,8 @@
         <activity android:name=".StudentMain" />
         <activity android:name=".AdminMain" />
         <activity android:name=".ITUserMain" />
-        <activity android:name=".CodeCheck"></activity>
+        <activity android:name=".CodeCheck" />
+        <activity android:name=".Checked_In_Page"></activity>
     </application>
 
 </manifest>
