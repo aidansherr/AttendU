@@ -8,6 +8,9 @@ package com.snhu.attendu.attendu;
 public class Course
 {
     public
+    SignInPin pin = new SignInPin();
+    String random = "12345";
+    //String random = Integer.toString(pin.GenerateCode());
     Course(String className)
     {
         this.className=className;
@@ -36,24 +39,9 @@ public class Course
 
 
 
-    boolean codeCheck = false;
 
 
-    public void checkPin()
-    {
-        CodeCheck code = new CodeCheck();
-        SignInPin Pin = new SignInPin();
-        //String random = Integer.toString(Pin.GenerateCode());
-        String random = "12345";
 
-        if(random.equals(code.userPinCode))
-        {
-            codeCheck = true;
-            code.userCheck.setChecked(true);
-        }
-        else
-        {
-            //output that the pin did not match professor pin
-        }
-    }
+
+
 }

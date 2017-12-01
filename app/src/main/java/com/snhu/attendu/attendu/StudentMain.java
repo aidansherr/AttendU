@@ -13,11 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentMain extends AppCompatActivity {
+
+    Button studentButton;
     List<Course> courses=new ArrayList<Course>();
     Student newUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Course math=new Course("Math");
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_student_main);
+
+        studentButton = (Button) findViewById(R.id.studentButton);
+        studentButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+                    public void onClick(View v)
+            {
+                Intent StudentPin = new Intent(getApplicationContext(), CodeCheck.class);//switches to CodeCheck
+                startActivity(StudentPin);
+            }
+        });
+        /*Course math=new Course("Math");
         Course english=new Course("English");
         Course cs= new Course("Junior lab");
 
@@ -29,11 +45,10 @@ public class StudentMain extends AppCompatActivity {
 
         newUser= new Student("Tyler",courses,"P");
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
-        makeButtons();
+
+        makeButtons();*/
     }
-    public void openPinWindow(View view)
+   /* public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,CodeCheck.class);
         startActivity(inten);
@@ -69,6 +84,6 @@ public class StudentMain extends AppCompatActivity {
                 btn.setBackgroundColor(Color.GREEN);
             }
         }
-    }
+    }*/
 
 }

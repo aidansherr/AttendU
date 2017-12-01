@@ -18,6 +18,29 @@ public class CodeCheck extends AppCompatActivity {
     Button submitButton;
     CheckBox userCheck;
 
+    boolean codeCheck = false;
+
+    Course course = new Course("Pin");
+   // String random = course.random;
+
+    public void checkPin()
+    {
+
+
+
+       //String random = "12345";
+
+        if(course.random.equals(userPinCode))
+        {
+            codeCheck = true;
+            userCheck.setChecked(true);
+        }
+        else
+        {
+            //output that the pin did not match professor pin
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +54,12 @@ public class CodeCheck extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userPinCode = classCodeInput.getText().toString();
+                checkPin();
 
 
 
             }
+
         });
 
     }
