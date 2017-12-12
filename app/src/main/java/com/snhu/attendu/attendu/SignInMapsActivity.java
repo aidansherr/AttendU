@@ -1,6 +1,7 @@
 package com.snhu.attendu.attendu;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -11,9 +12,27 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import java.util.Random;
 
 public class SignInMapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -46,9 +65,20 @@ public class SignInMapsActivity extends FragmentActivity implements OnMapReadyCa
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng snhu = new LatLng(43, -70);
+       LatLng latLng = new LatLng(43.032710, -71.441566);
+        Circle circle;
+        FusedLocationProviderClient mFusedLocationClient;
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mMap.addMarker(new MarkerOptions().position(latLng)).setTitle("Class");
+        circle = mMap.addCircle(new CircleOptions()
+                .center(latLng)
+                .radius(20)
+                .strokeColor(Color.DKGRAY)
+                .strokeWidth(10)
+                .fillColor(Color.argb(128, 255, 0, 0))
+                .clickable(false));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16.0f));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(snhu));
         text= (TextView) findViewById(R.id.pinBox);
         int randomNumber=GenerateCode(); //Generates a random number using GenerateCode
     }
