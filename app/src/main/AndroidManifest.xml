@@ -61,6 +61,8 @@
         <activity
             android:name=".SignInMapsActivity"
             android:label="@string/title_activity_sign_in_maps"></activity>
+        <activity android:name=".CodeCheck" />
+        <activity android:name=".Checked_In_Page"/>
         //<service android:name=".GeofenceTransitionService"/>
         <service android:name=".GeofenceTransitionsIntentService"/>
     </application>

@@ -8,6 +8,9 @@ package com.snhu.attendu.attendu;
 public class Course
 {
     public
+    SignInPin pin = new SignInPin();
+    String random = "12345";
+    //String random = Integer.toString(pin.GenerateCode());
     Course(String className)
     {
         this.className=className;
