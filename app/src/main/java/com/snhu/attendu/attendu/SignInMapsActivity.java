@@ -64,20 +64,6 @@ public class SignInMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-       LatLng latLng = new LatLng(43.032710, -71.441566);
-        Circle circle;
-        FusedLocationProviderClient mFusedLocationClient;
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        mMap.addMarker(new MarkerOptions().position(latLng)).setTitle("Class");
-        circle = mMap.addCircle(new CircleOptions()
-                .center(latLng)
-                .radius(20)
-                .strokeColor(Color.DKGRAY)
-                .strokeWidth(10)
-                .fillColor(Color.argb(128, 255, 0, 0))
-                .clickable(false));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16.0f));
 
         text= (TextView) findViewById(R.id.pinBox);
         int randomNumber=GenerateCode(); //Generates a random number using GenerateCode
@@ -104,8 +90,19 @@ public class SignInMapsActivity extends FragmentActivity implements OnMapReadyCa
             int randomNumber = GenerateCode();
             String random = Integer.toString(randomNumber);// casts it as a string for the TextView
             text.setText(random);
-            LatLng snhu = new LatLng(43, -70);
-            mMap.addMarker(new MarkerOptions().position(snhu).title("Marker in SNHU"));
+            LatLng latLng = new LatLng(43.032710, -71.441566);
+            Circle circle;
+            FusedLocationProviderClient mFusedLocationClient;
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+            mMap.addMarker(new MarkerOptions().position(latLng)).setTitle("Class");
+            circle = mMap.addCircle(new CircleOptions()
+                    .center(latLng)
+                    .radius(20)
+                    .strokeColor(Color.DKGRAY)
+                    .strokeWidth(10)
+                    .fillColor(Color.argb(128, 255, 0, 0))
+                    .clickable(false));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16.0f));
             pinDroped=true;
 
             CountDownTimer timer = new CountDownTimer(1800000, 1) {
