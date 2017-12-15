@@ -45,8 +45,6 @@ public class CodeCheck extends AppCompatActivity {
         }
         else
         {
-            codeCheck = false;
-            userCheck.setChecked(false);
             //output that the pin did not match professor pin
             toast.show();
         }
@@ -74,4 +72,8 @@ public class CodeCheck extends AppCompatActivity {
         });
 
     }
+
+
+
+
 }

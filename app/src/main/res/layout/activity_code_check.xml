@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minHeight="10dp"
+    android:minWidth="10dp"
     tools:context="com.snhu.attendu.attendu.CodeCheck">
 
     <TextView
@@ -57,17 +59,40 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:enabled="false"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:checked="false"
         android:duplicateParentState="false"
+        android:enabled="false"
         android:text="Checked In"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map1"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="407dp"
+        android:layout_height="273dp"
+        map:cameraZoom="17"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/checkBox"
+        map:mapType="normal"
+        tools:context="com.snhu.attendu.attendu.StudentGPS">
+
+        <TextView
+            android:id="@+id/pinBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:layout_marginTop="70dp"
+            android:padding="10dp"
+            android:paddingRight="10dp" />
+        />
+    </fragment>
 </android.support.constraint.ConstraintLayout>

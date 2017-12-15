@@ -81,10 +81,10 @@ public class StudentGPS extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
+        setContentView(R.layout.activity_code_check);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         SupportMapFragment mapFragment1 = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map1);
         mapFragment1.getMapAsync(this);
         // Empty list for storing geofences.
         mGeofenceList = new ArrayList<>();
