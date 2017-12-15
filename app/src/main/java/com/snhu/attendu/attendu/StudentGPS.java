@@ -2,6 +2,7 @@ package com.snhu.attendu.attendu;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -18,6 +19,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +47,45 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class StudentGPS extends AppCompatActivity implements OnMapReadyCallback, OnCompleteListener<Void> {
+
+
+    String userPinCode;
+    EditText classCodeInput;
+
+    Button submitButton;
+    CheckBox userCheck;
+
+    boolean codeCheck = false;
+
+
+    Course course = new Course("Pin");
+
+
+    public void checkPin()
+    {
+
+
+        Context context = getApplicationContext();
+        CharSequence text = "Wrong Pin Number";
+        CharSequence text2 = "Successfully Checked In";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast2 = Toast.makeText(context,text2,duration);
+
+
+        if(course.random.equals(userPinCode))
+        {
+            codeCheck = true;
+            userCheck.setChecked(true);
+            toast2.show(); //output that the user has signed in
+        }
+        else
+        {
+            //output that the pin did not match professor pin
+            toast.show();
+        }
+    }
+
 
     private GoogleMap mMap1;
     private Circle circle;
