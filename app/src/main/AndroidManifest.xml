@@ -63,7 +63,7 @@
             android:value="@integer/google_play_services_version" />
         <activity
             android:name=".SignInMapsActivity"
-            android:label="@string/title_activity_sign_in_maps"></activity>
+            android:label="@string/title_activity_sign_in_maps"/>
         <activity android:name=".CodeCheck" />
         <activity android:name=".Checked_In_Page"/>
         <service android:name=".GeofenceTransitionsIntentService"/>

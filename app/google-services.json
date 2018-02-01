@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "90378061283",
+    "firebase_url": "https://attendu-c43e3.firebaseio.com",
+    "project_id": "attendu-c43e3",
+    "storage_bucket": "attendu-c43e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90378061283:android:eeb8308bfa35b217",
+        "android_client_info": {
+          "package_name": "com.snhu.attendu.attendu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90378061283-e8pits5uiroirc7qbrj39dg75bsp7uis.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snhu.attendu.attendu",
+            "certificate_hash": "eb75445e82e9db8d3d3e2c0112ea8696929f851b"
+          }
+        },
+        {
+          "client_id": "90378061283-o121ec542ukco7ldqcmpsi0ohmtcct5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUdJ_afVMxebe-7GO9IpXHP6BQOKIN-k0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90378061283-o121ec542ukco7ldqcmpsi0ohmtcct5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
