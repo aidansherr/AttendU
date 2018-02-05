@@ -18,8 +18,8 @@ public class StudentMain extends AppCompatActivity {
     List<Course> courses=new ArrayList<Course>();
     Student newUser;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
+
 
         Course math=new Course("Math");
         Course english=new Course("English");
@@ -31,13 +31,12 @@ public class StudentMain extends AppCompatActivity {
 
         courses.get(1).setCourseAvailability(true);
 
-        newUser= new Student("Tyler",courses,"S");
+        newUser= new Student("Tyler",courses,"P");
+
         super.onCreate(savedInstanceState);
-
-
-        makeButtons();
         setContentView(R.layout.activity_student_main);
-
+        makeButtons();
+        
         studentButton = (Button) findViewById(R.id.studentButton);
         studentButton.setOnClickListener(new View.OnClickListener()
         {
@@ -49,17 +48,15 @@ public class StudentMain extends AppCompatActivity {
             }
         });
 
-
-
     }
-   public void openPinWindow(View view)
+    public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,CodeCheck.class);
         startActivity(inten);
     }
+
     public void makeButtons()
     {
-
         for(int i=0;i<courses.size();i++)
         {
             TableRow row = new TableRow(this);
@@ -67,7 +64,7 @@ public class StudentMain extends AppCompatActivity {
             Button btn= new Button(this);
             btn.setText(newUser.getClassName(courses.get(i)));
             btn.setHeight(150);
-            btn.setWidth(100);
+            btn.setWidth(300);
             btn.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -86,5 +83,7 @@ public class StudentMain extends AppCompatActivity {
             }
         }
     }
+
+
 
 }
