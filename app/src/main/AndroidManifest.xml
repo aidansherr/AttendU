@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.snhu.attendu.attendu">
+    package="com.snhu.attendu.attendu"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -15,11 +16,13 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
@@ -60,10 +63,9 @@
             android:value="@integer/google_play_services_version" />
         <activity
             android:name=".SignInMapsActivity"
-            android:label="@string/title_activity_sign_in_maps"></activity>
+            android:label="@string/title_activity_sign_in_maps"/>
         <activity android:name=".CodeCheck" />
         <activity android:name=".Checked_In_Page"/>
-        //<service android:name=".GeofenceTransitionService"/>
         <service android:name=".GeofenceTransitionsIntentService"/>
     </application>
 
