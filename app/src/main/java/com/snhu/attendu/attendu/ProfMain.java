@@ -17,7 +17,8 @@ import java.util.List;
 
 import static android.R.interpolator.linear;
 
-public class ProfMain extends AppCompatActivity
+public class
+ProfMain extends AppCompatActivity
 {
     List<Course> courses= new ArrayList<Course>();
     Professor newUser;
