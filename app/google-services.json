@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "608300017400",
+    "project_id": "firebase-attendu"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608300017400:android:eeb8308bfa35b217",
+        "android_client_info": {
+          "package_name": "com.snhu.attendu.attendu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608300017400-378h5en3qtd9gc6gbevkfj8n6p3figbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw9o-f9o340whNQ91bFHEn3GGjkopz6wU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-109964451-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
