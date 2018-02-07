@@ -24,7 +24,7 @@ public class SignInPin extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         text= (TextView) findViewById(R.id.pinBox);
-        int randomNumber=GenerateCode(); //Generates a random number using GenerateCode
+        int randomNumber=GenerateCode(); //Generates a random number using generateCode
         android.app.Fragment mapfragment= getFragmentManager().findFragmentById(R.id.map);
 
 

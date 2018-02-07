@@ -52,13 +52,13 @@ public class CodeCheck extends AppCompatActivity implements
     CheckBox userCheck;
 
     boolean codeCheck = false;
-
+    private boolean isInsideGeofence = false;
     //
     //Map/Location variables
     //
     private Circle circle;
     private GoogleMap mMap1;
-    private static final String TAG = StudentGPS.class.getSimpleName();
+    private static final String TAG = CodeCheck.class.getSimpleName();
     private FusedLocationProviderClient mFusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -159,6 +159,8 @@ public class CodeCheck extends AppCompatActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap1 = googleMap;
+
+        //TODO load in geofence data from database
         mMap1.addMarker(new MarkerOptions().position(latLng)).setTitle("Class");
         circle = mMap1.addCircle(new CircleOptions()
                 .center(latLng)
@@ -291,18 +293,6 @@ public class CodeCheck extends AppCompatActivity implements
             Log.w(TAG, errorMessage);
         }
     }
-
-//    private void enableMyLocation() {
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            // Permission to access the location is missing.
-//            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-//                    Manifest.permission.ACCESS_FINE_LOCATION, true);
-//        } else if (mMap1 != null) {
-//            // Access to the location has been granted to the app.
-//            mMap1.setMyLocationEnabled(true);
-//        }
-//    }
 
     private void updateLocationUI() {
         if (mMap1 == null) {
