@@ -1,6 +1,5 @@
 package com.snhu.attendu.attendu;
 
-import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +7,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,21 +19,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -44,9 +39,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, OnCompleteListener<Void> {
+public class CodeCheck extends AppCompatActivity implements
+        OnMapReadyCallback, OnCompleteListener<Void>,
+        ActivityCompat.OnRequestPermissionsResultCallback  {
 
 
     String userPinCode;
@@ -56,22 +52,40 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
     CheckBox userCheck;
 
     boolean codeCheck = false;
+    private boolean isInsideGeofence = false;
+    //
+    //Map/Location variables
+    //
+    private Circle circle;
+    private GoogleMap mMap1;
+    private static final String TAG = CodeCheck.class.getSimpleName();
+    private FusedLocationProviderClient mFusedLocationClient;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
+    private static final int DEFAULT_ZOOM = 15;
+    private LatLng latLng = new LatLng(43.032710, -71.441566);
+    private final LatLng mDefaultLocation = new LatLng(43.040692, -71.452886);
+    private Location mLastKnownLocation;
+
+    private boolean mLocationPermissionGranted;
+    /**
+     * Tracks whether the user requested to add or remove geofences, or to do neither.
+     */
+    private enum PendingGeofenceTask {
+        ADD, REMOVE, NONE
+    }
 
     Course course = new Course("Pin");
 
-
     public void checkPin()
     {
-
-
         Context context = getApplicationContext();
         CharSequence text = "Wrong Pin Number";
         CharSequence text2 = "Successfully Checked In";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         Toast toast2 = Toast.makeText(context,text2,duration);
-
 
         if(course.random.equals(userPinCode))
         {
@@ -84,22 +98,6 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
             //output that the pin did not match professor pin
             toast.show();
         }
-    }
-
-
-    private GoogleMap mMap1;
-    private Circle circle;
-    private static final String TAG = StudentGPS.class.getSimpleName();
-    private FusedLocationProviderClient mFusedLocationClient;
-    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
-    private LatLng latLng = new LatLng(43.032710, -71.441566);
-    protected Location mLastLocation;
-    private LocationRequest locationRequest;
-    /**
-     * Tracks whether the user requested to add or remove geofences, or to do neither.
-     */
-    private enum PendingGeofenceTask {
-        ADD, REMOVE, NONE
     }
 
     /**
@@ -120,14 +118,14 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
 
     private PendingGeofenceTask mPendingGeofenceTask = PendingGeofenceTask.NONE;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_code_check);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        SupportMapFragment mapFragment1 = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map1);
-        mapFragment1.getMapAsync(this);
+
         // Empty list for storing geofences.
         mGeofenceList = new ArrayList<>();
 
@@ -140,14 +138,6 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
         populateGeofenceList();
 
         mGeofencingClient = LocationServices.getGeofencingClient(this);
-        //mLocationCallback = new LocationCallback(){
-        //  @Override
-        //public void onLocationResult(LocationResult locationResult){
-        //  for(Location location : locationResult.getLocations()){
-        //    //update location UI
-        // }
-        //};
-        //};
         classCodeInput = (EditText) findViewById(R.id.classCodeInput);
         submitButton = (Button) findViewById(R.id.submitButton);
         userCheck = (CheckBox) findViewById(R.id.checkBox);
@@ -160,11 +150,17 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
 
             }
         });
+        SupportMapFragment mapFragment1 = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map1);
+        mapFragment1.getMapAsync(this);
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap1 = googleMap;
+
+        //TODO load in geofence data from database
         mMap1.addMarker(new MarkerOptions().position(latLng)).setTitle("Class");
         circle = mMap1.addCircle(new CircleOptions()
                 .center(latLng)
@@ -173,35 +169,56 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
                 .strokeWidth(10)
                 .fillColor(Color.argb(128, 255, 0, 0))
                 .clickable(false));
-        mMap1.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        // Prompt the user for permission.
+        getLocationPermission();
 
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
+
+        // Get the current location of the device and set the position of the map.
+        getDeviceLocation();
     }
+
+    /**
+     * Gets the current location of the device, and positions the map's camera.
+     */
+    private void getDeviceLocation() {
+        /*
+         * Get the best and most recent location of the device, which may be null in rare
+         * cases when a location is not available.
+         */
+        try {
+            if (mLocationPermissionGranted) {
+                Task<Location> locationResult = mFusedLocationClient.getLastLocation();
+                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            // Set the map's camera position to the current location of the device.
+                            mLastKnownLocation = task.getResult();
+                            mMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    new LatLng(mLastKnownLocation.getLatitude(),
+                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                        } else {
+                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.e(TAG, "Exception: %s", task.getException());
+                            mMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                            mMap1.getUiSettings().setMyLocationButtonEnabled(false);
+                        }
+                    }
+                });
+            }
+        } catch(SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
+    }
+
+
+
     @Override
     public void onStart() {
         super.onStart();
 
-        if (!checkPermissions()) {
-            requestPermissions();
-        } else {
-            performPendingGeofenceTask();
-            getLastLocation();
-        }
-    }
-    @SuppressWarnings("MissingPermission")
-    private void getLastLocation(){
-        mFusedLocationClient.getLastLocation()
-                .addOnCompleteListener(this, new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if(task.isSuccessful() && task.getResult() != null){
-                            mLastLocation = task.getResult();
-
-                        }else{
-                            Log.w(TAG, "getLastLocationException", task.getException());
-                            showSnackbar("No Location Detected");
-                        }
-                    }
-                });
     }
 
     /**
@@ -230,7 +247,7 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
      */
     @SuppressWarnings("MissingPermission")
     private void addGeofences() {
-        if (!checkPermissions()) {
+        if (mLocationPermissionGranted) {
             showSnackbar(getString(R.string.insufficient_permissions));
             return;
         }
@@ -247,7 +264,7 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
      */
     @SuppressWarnings("MissingPermission")
     private void removeGeofences() {
-        if (!checkPermissions()) {
+        if (mLocationPermissionGranted) {
             showSnackbar(getString(R.string.insufficient_permissions));
             return;
         }
@@ -277,6 +294,24 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
         }
     }
 
+    private void updateLocationUI() {
+        if (mMap1 == null) {
+            return;
+        }
+        try {
+            if (mLocationPermissionGranted) {
+                mMap1.setMyLocationEnabled(true);
+                mMap1.getUiSettings().setMyLocationButtonEnabled(true);
+            } else {
+                mMap1.setMyLocationEnabled(false);
+                mMap1.getUiSettings().setMyLocationButtonEnabled(false);
+                mLastKnownLocation = null;
+                getLocationPermission();
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
+    }
     /**
      * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
      * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
@@ -385,91 +420,37 @@ public class CodeCheck extends AppCompatActivity implements OnMapReadyCallback, 
         }
     }
 
-    /**
-     * Return the current state of the permissions needed.
-     */
-    private boolean checkPermissions() {
-        int permissionState = ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        return permissionState == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void requestPermissions() {
-        boolean shouldProvideRationale =
-                ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.ACCESS_FINE_LOCATION);
-
-        // Provide an additional rationale to the user. This would happen if the user denied the
-        // request previously, but didn't check the "Don't ask again" checkbox.
-        if (shouldProvideRationale) {
-            Log.i(TAG, "Displaying permission rationale to provide additional context.");
-            showSnackbar(R.string.permission_rationale, android.R.string.ok,
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // Request permission
-                            ActivityCompat.requestPermissions(CodeCheck.this,
-                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                    REQUEST_PERMISSIONS_REQUEST_CODE);
-                        }
-                    });
-        } else {
-            Log.i(TAG, "Requesting permission");
-            // Request permission. It's possible this can be auto answered if device policy
-            // sets the permission in a given state or the user denied the permission
-            // previously and checked "Never ask again".
-            ActivityCompat.requestPermissions(CodeCheck.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
-        Log.i(TAG, "onRequestPermissionResult");
-        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
-            if (grantResults.length <= 0) {
-                // If user interaction was interrupted, the permission request is cancelled and you
-                // receive empty arrays.
-                Log.i(TAG, "User interaction was cancelled.");
-            } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.i(TAG, "Permission granted.");
-                performPendingGeofenceTask();
-                getLastLocation();
-            } else {
-                // Permission denied.
-
-                // Notify the user via a SnackBar that they have rejected a core permission for the
-                // app, which makes the Activity useless. In a real app, core permissions would
-                // typically be best requested during a welcome-screen flow.
-
-                // Additionally, it is important to remember that a permission might have been
-                // rejected without asking the user for permission (device policy or "Never ask
-                // again" prompts). Therefore, a user interface affordance is typically implemented
-                // when permissions are denied. Otherwise, your app could appear unresponsive to
-                // touches or interactions which have required permissions.
-                showSnackbar(R.string.permission_denied_explanation, R.string.settings,
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // Build intent that displays the App settings screen.
-                                Intent intent = new Intent();
-                                intent.setAction(
-                                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                Uri uri = Uri.fromParts("package",
-                                        BuildConfig.APPLICATION_ID, null);
-                                intent.setData(uri);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                            }
-                        });
-                mPendingGeofenceTask = PendingGeofenceTask.NONE;
+        mLocationPermissionGranted = false;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mLocationPermissionGranted = true;
+                }
             }
         }
+        updateLocationUI();
     }
 
+    private void getLocationPermission() {
+    /*
+     * Request location permission, so that we can get the location of the
+     * device. The result of the permission request is handled by a callback,
+     * onRequestPermissionsResult.
+     */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
 }

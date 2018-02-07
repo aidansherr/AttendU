@@ -36,14 +36,15 @@
         android:padding="10dp"
         android:layout_marginTop="110dp"
         android:paddingRight="10dp"/>
+
     <Button
-        android:onClick="goBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
-        android:text="Exit"
-        android:padding="10dp"
         android:layout_marginTop="160dp"
-        android:paddingRight="10dp"/>
+        android:onClick="goBack"
+        android:padding="10dp"
+        android:paddingRight="10dp"
+        android:text="Submit" />
 
 </fragment>
