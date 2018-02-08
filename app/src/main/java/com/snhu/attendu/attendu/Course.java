@@ -44,7 +44,8 @@ public class Course
         FirebaseDatabase mDatabase;
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=mDatabase.getReference();
-        databaseReference.child("Course").push().setValue(this);
+
+        databaseReference.child("Course").child("Course_ID").child("Course_Name").setValue(getClassName());
 
     }
 

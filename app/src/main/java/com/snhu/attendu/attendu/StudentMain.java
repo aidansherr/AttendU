@@ -23,7 +23,7 @@ public class StudentMain extends AppCompatActivity {
 
         Course math=new Course("Math");
         Course english=new Course("English");
-        Course cs= new Course("Lab");
+        Course cs= new Course("CS");
 
         courses.add(math);
         courses.add(english);

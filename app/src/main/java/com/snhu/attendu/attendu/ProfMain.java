@@ -10,6 +10,10 @@ import android.widget.TableLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +30,11 @@ ProfMain extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
 
     {
+        FirebaseDatabase mDatabase;
+        mDatabase= FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=mDatabase.getReference();
 
+        databaseReference.child("Professor").child("Professor_ID").child("Professor_Name").setValue("Tyler");
 
         Course math=new Course("Math");
         Course english=new Course("English");
