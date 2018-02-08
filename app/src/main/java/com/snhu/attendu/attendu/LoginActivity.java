@@ -85,10 +85,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     public String UserLevel;
-    private DatabaseReference mDatabase;
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = database.getReference();
-   // private DatabaseReference
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -340,11 +337,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             //username:password:s     where s is default student profile type.
             newUser = (mEmail + ":" + mPassword + ":s" + "/n");
         }
-        private void writeNewUser(String userID, String email, String password)
-        {
-            UserLoginTask user = new UserLoginTask(email, password);
-            mDatabase.child("users").child(userID).setValue(user);
-        }
+
 
 
         @Override
@@ -394,8 +387,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             UserLevel = "s";
             PasswordDigest pd = new PasswordDigest();
             newUser = (mEmail + ":" + pd.encryptPassword(mPassword) + ":s" + "/n");
-            myRef.setValue("Hello, World!");
-            //writeNewUser("1",mEmail,mPassword);
+
            // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("user", newUser);
