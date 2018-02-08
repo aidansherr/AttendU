@@ -14,7 +14,7 @@ import java.util.List;
 
 public class StudentMain extends AppCompatActivity {
 
-    Button studentButton;
+
     List<Course> courses=new ArrayList<Course>();
     Student newUser;
     @Override
@@ -23,7 +23,7 @@ public class StudentMain extends AppCompatActivity {
 
         Course math=new Course("Math");
         Course english=new Course("English");
-        Course cs= new Course("Junior lab");
+        Course cs= new Course("Lab");
 
         courses.add(math);
         courses.add(english);
@@ -36,17 +36,7 @@ public class StudentMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
         makeButtons();
-        
-        studentButton = (Button) findViewById(R.id.studentButton);
-        studentButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent StudentPin = new Intent(getApplicationContext(), CodeCheck.class);//switches to CodeCheck
-                startActivity(StudentPin);
-            }
-        });
+
 
     }
     public void openPinWindow(View view)
