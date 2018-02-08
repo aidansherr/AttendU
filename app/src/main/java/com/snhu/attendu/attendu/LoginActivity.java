@@ -34,6 +34,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -82,7 +85,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     public String UserLevel;
-
+    private DatabaseReference mDatabase;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference();
+   // private DatabaseReference
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -325,13 +331,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private SharedPreferences sharedPreferences;
         private String PREF_NAME = "prefs";
 
-        UserLoginTask(String email, String password) { //Add string userlevel
+
+
+        UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
             //Fields
             //username:password:s     where s is default student profile type.
             newUser = (mEmail + ":" + mPassword + ":s" + "/n");
         }
+        private void writeNewUser(String userID, String email, String password)
+        {
+            UserLoginTask user = new UserLoginTask(email, password);
+            mDatabase.child("users").child(userID).setValue(user);
+        }
+
 
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -380,6 +394,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             UserLevel = "s";
             PasswordDigest pd = new PasswordDigest();
             newUser = (mEmail + ":" + pd.encryptPassword(mPassword) + ":s" + "/n");
+            myRef.setValue("Hello, World!");
+            //writeNewUser("1",mEmail,mPassword);
            // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("user", newUser);
