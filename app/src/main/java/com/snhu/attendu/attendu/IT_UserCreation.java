@@ -17,9 +17,8 @@ public class IT_UserCreation extends AppCompatActivity {
 
     //User types for the drop down
     String[] userTypes = new String[]{"Student", "Professor", "IT", "Admin"};
-
-
     
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
