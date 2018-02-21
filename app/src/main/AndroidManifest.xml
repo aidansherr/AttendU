@@ -24,15 +24,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ProfMain" />
         <activity
             android:name=".SignInPin"
@@ -47,7 +48,9 @@
         </intent-filter>
             </activity>
         <activity android:name=".AdminMain" />
-        <activity android:name=".ITUserMain" />
+        <activity android:name=".ITUserMain">
+        </activity>
+        <activity android:name=".IT_UserCreation"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
