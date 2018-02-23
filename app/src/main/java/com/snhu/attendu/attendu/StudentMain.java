@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,8 +23,12 @@ public class StudentMain extends AppCompatActivity {
     private View mLayout;
     private TextView mStudentLabel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_student_main);
 
         mLayout = findViewById(R.id.student_linear);
         mStudentLabel = (TextView) findViewById(R.id.student_label);
@@ -41,10 +46,9 @@ public class StudentMain extends AppCompatActivity {
         courses.get(1).setCourseAvailability(true);
 
         newUser= new Student("Tyler",courses,"P");
-        //mStudentLabel.setText("Tom Brady");
+        mStudentLabel.setText("Tom Brady");
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
+
 
 
         makeButtons();
@@ -77,12 +81,16 @@ public class StudentMain extends AppCompatActivity {
             mParentLayout.addView(dualView);
             dualView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             dualView.setOrientation(LinearLayout.HORIZONTAL);
-
+            //TODO strecth buttons to fill screen
             Button btn= new Button(this);
             final Button absenceBtn = new Button (this);
+            LinearLayout.LayoutParams buttonParams =
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-            btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            absenceBtn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            btn.setLayoutParams(buttonParams);
+            absenceBtn.setLayoutParams(buttonParams);
+
+            buttonParams.setMargins(0,40,0,0);
             btn.setId(i);
             absenceBtn.setId(i);
             btn.setBackgroundColor(Color.rgb(220, 220 ,220));
