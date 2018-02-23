@@ -27,7 +27,7 @@ public class ITUserMain extends AppCompatActivity {
 
     public void createUserTask(View view)
     {
-        Intent userCreation = new Intent(this, IT_UserCreation.class);
+        Intent userCreation = new Intent(getApplicationContext(), IT_UserCreation.class);
         startActivity(userCreation);
     }
 }
