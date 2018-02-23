@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AttendU</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Connexion ou Inscription</string>
+    <string name="action_sign_in_short">Se connecter</string>
+    <string name="error_invalid_email">Cette adresse e-mail est invalide</string>
+    <string name="error_invalid_password">Ce mot de passe est incorrect</string>
+    <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
+    <string name="error_field_required">Ce champ est requis</string>
+    <string name="permission_rationale">Les autorisations de contacts sont nécessaires pour fournir des complétions de courrier électronique</string>
+    <string name="title_activity_pin_page">Page de pin</string>
+    <string name="title_activity_sign_in_pin">Inscrivez-vous</string>
+    <string name="title_activity_sign_in_page">Page de connexion</string>
+    <string name="title_activity_sign_in_maps">Carte</string>
+    <string name="add_geofences">Ajouter geofence</string>
+    <string name="remove_geofences">Retirer geofence</string>
+    <string name="geofences_added">Geofence ajouté</string>
+    <string name="geofences_removed">Geofence supprimé</string>
+    <string name="geofence_not_available">Le service geofence n\'est pas disponible maintenant</string>
+    <string name="geofence_too_many_geofences">Votre application a enregistré trop de geofences</string>
+    <string name="geofence_too_many_pending_intents">Vous avez fourni trop d\'intentions en attente à l\'appel addGeofence()</string>
+    <string name="unknown_geofence_error">Erreur inconnue: le service Geofence n\'est pas disponible maintenant</string>
+    <string name="geofence_transition_invalid_type">Erreur de transition Geofence: type de transition non valide %1$d</string>
+    <string name="geofence_transition_entered">Entré</string>
+    <string name="geofence_transition_exited">Quitté</string>
+    <string name="unknown_geofence_transition">Transition inconnue</string>
+    <string name="geofence_transition_notification_text">Cliquez sur notification pour revenir à l\'application</string>
+    <string name="insufficient_permissions">Permissions insuffisantes</string>
+    <string name="permission_rationale1">La permission de localisation est nécessaire pour les fonctionnalités de base</string>
+    <string name="permission_denied_explanation">La permission a été refusée, mais est nécessaire pour les fonctionnalités de base</string>
+    <string name="settings">Paramètres</string>
+    <string name="permission_rationale_location">L\'accès au service de localisation est requis pour démontrer la fonction «ma position», qui indique votre position actuelle sur la carte</string>
+    <string name="location_permission_denied">Cet exemple nécessite une autorisation de localisation pour activer la couche \"Ma position\". Veuillez réessayer et autoriser l\'accès à l\'emplacement. Si l\'autorisation a été définitivement refusée, elle peut être activée à partir de Paramètres système> Applications> \"Démos de l\'API Google Maps\".</string>
+    <string name="permission_required_toast">La permission de localisation est requise pour cette démo.</string>
+</resources>

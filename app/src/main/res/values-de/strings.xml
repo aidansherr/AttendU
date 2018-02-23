@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AttendU</string>
+    <string name="permission_required_toast">Für diese Demo ist eine Standortgenehmigung erforderlich</string>
+    <string name="location_permission_denied">Für dieses Beispiel ist eine Standortberechtigung erforderlich, um die Ebene \"Mein Standort\" zu aktivieren. Bitte versuchen Sie es erneut und gewähren Sie Zugriff, um den Standort zu verwenden. Wenn die Berechtigung dauerhaft verweigert wurde, kann sie über die Systemeinstellungen> Apps> Google Maps-API-Demos aktiviert werden.</string>
+    <string name="permission_rationale_location">Der Zugriff auf den Standortdienst ist erforderlich, um die Funktion \"Mein Standort\" zu demonstrieren, die Ihren aktuellen Standort auf der Karte anzeigt.</string>
+    <string name="settings">die Einstellungen</string>
+    <string name="permission_denied_explanation">Die Berechtigung wurde verweigert, ist jedoch für die Kernfunktionalität erforderlich.</string>
+    <string name="permission_rationale1">Für die Kernfunktionalität wird eine Standortberechtigung benötigt</string>
+    <string name="insufficient_permissions">Nicht ausreichende Berechtigungen.</string>
+    <string name="geofence_transition_notification_text">Klicken Sie auf Benachrichtigung, um zur App zurückzukehren</string>
+    <string name="unknown_geofence_transition">Unbekannter Übergang</string>
+    <string name="geofence_transition_exited">Beendet</string>
+    <string name="geofence_transition_entered">Ingresó</string>
+    <string name="geofence_transition_invalid_type">Geofence-Übergangsfehler: ungültiger Übergangstyp %1$d</string>
+    <string name="unknown_geofence_error">Unbekannter Fehler: Der Geofence-Dienst ist derzeit nicht verfügbar</string>
+    <string name="geofence_too_many_pending_intents">Sie haben dem Aufruf von addGeofences() zu viele PendingIntents bereitgestellt</string>
+    <string name="geofence_too_many_geofences">Ihre App hat zu viele Geofences registriert</string>
+    <string name="geofence_not_available">Geofence-Dienst ist jetzt nicht verfügbar</string>
+    <string name="geofences_removed">Geofences entfernt</string>
+    <string name="geofences_added">Geofences hinzugefügt</string>
+    <string name="remove_geofences">Entfernen Sie Geofences</string>
+    <string name="add_geofences">Fügen Sie Geofences hinzu</string>
+    <string name="title_activity_sign_in_maps">Karte</string>
+    <string name="title_activity_sign_in_page">Anmeldeseite</string>
+    <string name="title_activity_sign_in_pin">Pin anmelden</string>
+    <string name="title_activity_pin_page">Pin-Seite</string>
+    <string name="permission_rationale">" Für die Bereitstellung von E-Mail-Vervollständigungen sind Kontakteberechtigungen erforderlich."</string>
+    <string name="error_field_required">Dieses Feld wird benötigt</string>
+    <string name="error_incorrect_password">Dieses Passwort ist falsch</string>
+    <string name="error_invalid_password">Dieses Passwort ist falsch</string>
+    <string name="error_invalid_email">Diese E-Mail-Adresse ist ungültig</string>
+    <string name="action_sign_in_short">Anmelden</string>
+    <string name="action_sign_in">Einloggen oder Registrieren</string>
+    <string name="prompt_password">Passwort</string>
+</resources>
