@@ -21,6 +21,11 @@
     <string name="title_activity_sign_in_page">SignInPage</string>
     <string name="title_activity_sign_in_maps">Map</string>
 
+
+    <!--Student Main-->
+    <string name="student_menu_form">Student Form</string>
+    <string name="report_absence">Report an absence</string>
+
     <!--IT Menu-->
     <string name="it_menu">IT Task Menu</string>
     <string name="create_user">Create new user</string>
