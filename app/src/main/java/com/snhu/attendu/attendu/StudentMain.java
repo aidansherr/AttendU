@@ -18,11 +18,11 @@ import java.util.List;
 
 public class StudentMain extends AppCompatActivity {
 
+    private View mLayout;
+    private TextView mStudentLabel;
 
     List<Course> courses=new ArrayList<Course>();
     Student newUser;
-    private View mLayout;
-    private TextView mStudentLabel;
 
 
     @Override
@@ -49,13 +49,9 @@ public class StudentMain extends AppCompatActivity {
         newUser= new Student("Tyler",courses,"P");
         mStudentLabel.setText("Tom Brady");
 
-
-
-
         makeButtons();
-
-
     }
+
     public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,CodeCheck.class);
@@ -68,6 +64,7 @@ public class StudentMain extends AppCompatActivity {
         String courseAbName = courses.get(num).getClassName();
 
         Intent absenceIntent = new Intent(getApplicationContext(), Absence.class);
+        absenceIntent.putExtra("courseName",courseAbName);
         startActivity(absenceIntent);
     }
 

@@ -27,6 +27,18 @@
     <string name="report_absence">Report absence</string>
     <string name="course_list">Course Listing</string>
 
+    <!--Absence-->
+    <string name="label_report_absence">Reporting absence for</string>
+    <string name="reason_type_prompt">Select a reason type</string>
+    <string-array name="reason_type">
+        <item>Select a reason type</item>
+        <item>Unexcused</item>
+        <item>Emergency</item>
+        <item>School Related</item>
+    </string-array>
+
+
+
     <!--IT Menu-->
     <string name="it_menu">IT Task Menu</string>
     <string name="create_user">Create new user</string>
