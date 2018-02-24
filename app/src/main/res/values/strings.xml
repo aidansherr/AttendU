@@ -24,7 +24,7 @@
 
     <!--Student Main-->
     <string name="student_menu_form">Student Form</string>
-    <string name="report_absence">Report an absence</string>
+    <string name="report_absence">Report absence</string>
     <string name="course_list">Course Listing</string>
 
     <!--IT Menu-->

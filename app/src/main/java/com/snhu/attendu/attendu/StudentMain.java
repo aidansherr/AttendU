@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -81,21 +82,25 @@ public class StudentMain extends AppCompatActivity {
             mParentLayout.addView(dualView);
             dualView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             dualView.setOrientation(LinearLayout.HORIZONTAL);
-            //TODO strecth buttons to fill screen
+
             Button btn= new Button(this);
             final Button absenceBtn = new Button (this);
             LinearLayout.LayoutParams buttonParams =
-                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+            LinearLayout.LayoutParams aButtonParams =
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+            buttonParams.weight = 1;
+            aButtonParams.weight = 3;
             btn.setLayoutParams(buttonParams);
-            absenceBtn.setLayoutParams(buttonParams);
-
-            buttonParams.setMargins(0,40,0,0);
+            absenceBtn.setLayoutParams(aButtonParams);
+            buttonParams.setMargins(0,60,0,0);
+            aButtonParams.setMargins(0,60,0,0);
             btn.setId(i);
             absenceBtn.setId(i);
-            btn.setBackgroundColor(Color.rgb(220, 220 ,220));
             btn.setText(newUser.getClassName(courses.get(i)));
-            absenceBtn.setBackgroundColor(Color.BLUE); //TODO Make some sort of icon
+
+            absenceBtn.setText(R.string.report_absence);
+            absenceBtn.setBackgroundColor(Color.LTGRAY);
 
             dualView.addView(btn);
             dualView.addView(absenceBtn);
@@ -119,11 +124,11 @@ public class StudentMain extends AppCompatActivity {
 
             if (courses.get(i).getCourseAvailibility() == true)
             {
-                btn.setBackgroundColor(Color.rgb(50, 205, 50));
+                btn.setBackgroundColor(Color.rgb(50, 205, 50)); //GREEN
+            }else
+            {
+                btn.setBackgroundColor(Color.rgb(220, 220 ,220)); //GRAY
             }
         }
     }
-
-
-
 }
