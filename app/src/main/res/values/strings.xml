@@ -36,9 +36,7 @@
         <item>Emergency</item>
         <item>School Related</item>
     </string-array>
-    <string-array name="date_select">
-        <item>Choose a date</item>
-    </string-array>
+    <string name="date_select">Choose a date</string>
 
 
     <!--IT Menu-->

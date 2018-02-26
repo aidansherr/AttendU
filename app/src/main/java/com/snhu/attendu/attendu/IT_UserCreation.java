@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -45,6 +46,11 @@ public class IT_UserCreation extends AppCompatActivity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.user_type, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mDropdown.setAdapter(adapter);
 
         addListenerOnButton();
     }
@@ -112,7 +118,7 @@ public class IT_UserCreation extends AppCompatActivity {
             showProgress(true);
 
             //TODO Write new user data to database
-
+            //email, password encrypted, typeofUser
         }
     }
 
