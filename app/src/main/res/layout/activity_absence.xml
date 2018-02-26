@@ -44,18 +44,19 @@
 
             <Spinner
                 android:id="@+id/date_select"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:background="@color/common_google_signin_btn_text_dark_disabled"
+                android:entries="@array/date_select"
               />
 
             <Spinner
                 android:id="@+id/reason_dropdown"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:background="@color/common_google_signin_btn_text_dark_disabled"
                 android:entries="@array/reason_type"
                 android:prompt="@string/reason_type_prompt"/>
 

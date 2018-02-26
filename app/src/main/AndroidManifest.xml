@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.snhu.attendu.attendu"
-    xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.snhu.attendu.attendu">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -14,7 +15,9 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.location.gps" />
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -24,34 +27,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ProfMain" />
         <activity
             android:name=".SignInPin"
             android:label="@string/title_activity_sign_in_pin"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".StudentMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-            </activity>
-        <activity android:name=".AdminMain" />
-        <activity android:name=".ITUserMain">
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".Absence"/>
-        <activity android:name=".IT_UserCreation"/>
+        <activity android:name=".AdminMain" />
+        <activity android:name=".ITUserMain"></activity>
+        <activity android:name=".Absence" />
+        <activity android:name=".IT_UserCreation" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -66,12 +66,15 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".SignInMapsActivity"
-            android:label="@string/title_activity_sign_in_maps"/>
+            android:label="@string/title_activity_sign_in_maps" />
         <activity android:name=".CodeCheck" />
-        <activity android:name=".Checked_In_Page"/>
-        <service android:name=".GeofenceTransitionsIntentService"/>
+        <activity android:name=".Checked_In_Page" />
+
+        <service android:name=".GeofenceTransitionsIntentService" />
+
     </application>
 
 </manifest>
