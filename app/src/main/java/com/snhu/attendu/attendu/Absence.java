@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by tyowe on 2/23/2018.
@@ -22,9 +26,10 @@ public class Absence extends AppCompatActivity{
     private Spinner mDropdown;
     private TextView mDateSelect;
     private DatePickerDialog mDateDialog;
-    private int mYear;
-    private int mMonth;
-    private int mDay;
+    private Calendar newDate;
+    private Calendar calendar;
+    private Button mSubmitButton;
+    private View mAbsenceFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,28 +39,39 @@ public class Absence extends AppCompatActivity{
         Intent prevIntent = getIntent(); // gets the previously created intent
         String courseName = prevIntent.getStringExtra("courseName");
 
+        mAbsenceFormView = findViewById(R.id.absence_form);
         mCourseLabel = (TextView) findViewById(R.id.course_name_label);
         mCourseLabel.setText(courseName);
 
-        Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
+        mSubmitButton = (Button) findViewById(R.id.submitButton);
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reportAbsence();
+            }
+        });
+
+        newDate = null;
+        calendar = Calendar.getInstance();
 
         mDateSelect = (TextView) findViewById(R.id.date_select);
         mDateSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseDate();
+                mDateDialog.show();
             }
         });
 
+        //TODO custom date picker for disabled dates
         mDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
+                mDateDialog.updateDate(year, monthOfYear, dayOfMonth);
+                newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                showSelectedDate();
             }
-        }, mYear, mMonth, mDay);
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         mDropdown = (Spinner) findViewById(R.id.reason_dropdown);
 
@@ -66,15 +82,47 @@ public class Absence extends AppCompatActivity{
     }
 
 
-
-
-    private void chooseDate()
+    void showSelectedDate()
     {
-        mDateDialog.show();
-
-
-
+        String formattedDate;
+        SimpleDateFormat sdf = new SimpleDateFormat("E, MMM d, yyyy");
+        formattedDate = sdf.format(newDate.getTime());
+        mDateSelect.setText(formattedDate);
     }
 
+    void reportAbsence()
+    {
+        boolean cancel = false;
+        View focusView = null;
+
+        TextView dropdownError = (TextView) mDropdown.getSelectedView();
+
+        mDateSelect.setError(null);
+        dropdownError.setError(null);
+
+        if(mDropdown.getSelectedItemPosition() == 0)
+        {
+            dropdownError.setError(getString(R.string.no_selection_excuse_type));
+            focusView = dropdownError;
+            cancel = true;
+        }
+
+        if(newDate == null)
+        {
+            mDateSelect.setError(getString(R.string.no_selection_date));
+            focusView = mDateSelect;
+            cancel = true;
+        }
+
+        if (cancel) {
+            //Show field with error
+            focusView.requestFocus();
+        } else {
+           //show success message
+            //TODO show success message and switch back to activity
+
+            //TODO Write absence to database
+        }
+    }
 }
 
