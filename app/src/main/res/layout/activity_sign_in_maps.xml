@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
-        android:text="Drop Pin"
+        android:text="@string/drop_pin"
         android:padding="10dp"
         android:layout_marginTop="20dp"
         android:paddingRight="10dp"/>
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
-        android:text="Remove Pin"
+        android:text="@string/remove_pin"
         android:padding="10dp"
         android:layout_marginTop="110dp"
         android:paddingRight="10dp"/>
@@ -45,6 +45,6 @@
         android:onClick="goBack"
         android:padding="10dp"
         android:paddingRight="10dp"
-        android:text="Submit" />
+        android:text="@string/submit" />
 
 </fragment>

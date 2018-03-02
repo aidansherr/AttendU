@@ -33,4 +33,28 @@
     <string name="permission_rationale_location">L\'accès au service de localisation est requis pour démontrer la fonction «ma position», qui indique votre position actuelle sur la carte</string>
     <string name="location_permission_denied">Cet exemple nécessite une autorisation de localisation pour activer la couche \"Ma position\". Veuillez réessayer et autoriser l\'accès à l\'emplacement. Si l\'autorisation a été définitivement refusée, elle peut être activée à partir de Paramètres système> Applications> \"Démos de l\'API Google Maps\".</string>
     <string name="permission_required_toast">La permission de localisation est requise pour cette démo.</string>
+    <string name="user_creation">Création d\'utilisateur</string>
+    <string name="remove_pin">Retirez la broche</string>
+    <string name="IT">La technologie Internet</string>
+    <string name="check_location_perms">Veuillez vérifier l\'autorisation de localisation</string>
+    <string name="enter_class_pin">Entrez la broche de classe</string>
+    <string name="submit">Soumettre</string>
+    <string name="checked_in">Enregistré</string>
+    <string name="email_address">Adresse e-mail</string>
+    <string name="create_new_user">Créer un nouvel utilisateur</string>
+    <string name="it_task_menu">Menu des tâches informatiques</string>
+    <string name="exit">Sortie</string>
+    <string name="professor">Professeur</string>
+    <string name="admin">Administrateur</string>
+    <string name="no_location">Aucun lieu détecté</string>
+    <string name="display_permission_for_context">Afficher la justification d\'autorisation pour fournir un contexte supplémentaire.</string>
+    <string name="requesting_permission">Demande de permission</string>
+    <string name="user_interaction_cancelled">L\'interaction de l\'utilisateur a été annulée.</string>
+    <string name="perm_granted">Permission accordée.</string>
+    <string name="wrong_pin_number">Numéro de broche erroné</string>
+    <string name="checkin_success">Vérifié avec succès</string>
+    <string name="location_null">L\'emplacement actuel est null. Utiliser les valeurs par défaut.</string>
+    <string name="student">étudiant</string>
+    <string name="drop_pin">Créer un marqueur</string>
+
 </resources>

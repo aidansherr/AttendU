@@ -16,7 +16,7 @@ public class IT_UserCreation extends AppCompatActivity {
     private Spinner mDropdown = (Spinner) findViewById(R.id.typeDropdown);
 
     //User types for the drop down
-    String[] userTypes = new String[]{"Student", "Professor", "IT", "Admin"};
+    String[] userTypes = new String[]{getString(R.string.student), getString(R.string.professor), getString(R.string.IT), getString(R.string.admin)};
     
 
     @Override

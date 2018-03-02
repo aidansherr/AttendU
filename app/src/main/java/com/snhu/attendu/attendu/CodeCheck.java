@@ -81,8 +81,8 @@ public class CodeCheck extends AppCompatActivity implements
     public void checkPin()
     {
         Context context = getApplicationContext();
-        CharSequence text = "Wrong Pin Number";
-        CharSequence text2 = "Successfully Checked In";
+        CharSequence text = getString(R.string.wrong_pin_number);
+        CharSequence text2 = getString(R.string.checkin_success);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         Toast toast2 = Toast.makeText(context,text2,duration);
@@ -200,7 +200,7 @@ public class CodeCheck extends AppCompatActivity implements
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
-                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.d(TAG, getString(R.string.location_null));
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap1.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap1.getUiSettings().setMyLocationButtonEnabled(false);

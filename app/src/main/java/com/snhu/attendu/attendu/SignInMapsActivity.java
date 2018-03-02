@@ -127,7 +127,7 @@ public class SignInMapsActivity extends AppCompatActivity implements
                 //TODO Store database info for geofence
             } else
             {
-                Toast toast = Toast.makeText(getApplicationContext(),"Please check location permission",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.check_location_perms,Toast.LENGTH_LONG);
                 toast.show();
             }
             //Generate code only once
@@ -184,7 +184,7 @@ public class SignInMapsActivity extends AppCompatActivity implements
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
-                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.d(TAG, getString(R.string.location_null));
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);

@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "dan.test1@snhu.edu:ec159d78f6c5de4c7c2d5f4933ce76b9583e1022:a",
             "prof.test@snhu.edu:94dcc9b1e739b7ca13d0e390d3d719ddaa223156:p",
-            "Tom.Brady@snhu.edu:b240a280af5b8e08ca06917dae3fd0f1a7fae49b:s",
+            "tom.brady@snhu.edu:b240a280af5b8e08ca06917dae3fd0f1a7fae49b:s",
             "tyler@snhu.edu:41589fdd0f4220c50eab22259d45629b5bb0848f:i"
     };
     /**
@@ -353,7 +353,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: Check users credentials from database
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
+                if (pieces[0].equals(mEmail.toLowerCase())) {
                     // Account exists, return true if the password matches.
                     PasswordDigest pd = new PasswordDigest();
                     //return pieces[1].equals(pd.encryptPassword(mPassword));
@@ -362,18 +362,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         UserLevel=pieces[2];
                         return true;
                     }
-
-
-
                 }
-
-
-
             }
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             String credential = preferences.getString("user", "");
             String[] pieces = credential.split(":");
-            if (pieces[0].equals(mEmail)) {
+            if (pieces[0].equals(mEmail.toLowerCase())) {
                 // Account exists, return true if the password matches.
                 PasswordDigest pd = new PasswordDigest();
                 return pieces[1].equals(pd.encryptPassword(mPassword));
@@ -386,7 +380,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             //Consider something else
             UserLevel = "s";
             PasswordDigest pd = new PasswordDigest();
-            newUser = (mEmail + ":" + pd.encryptPassword(mPassword) + ":s" + "/n");
+            newUser = (mEmail.toLowerCase() + ":" + pd.encryptPassword(mPassword) + ":s" + "/n");
 
            // SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences.edit();
@@ -408,15 +402,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
-
             Intent Student = new Intent(getApplicationContext(), StudentMain.class);//switches to Student_Main
             Intent Professor = new Intent(getApplicationContext(),ProfMain.class);//switches to ProfMain
             Intent Admin = new Intent(getApplicationContext(),AdminMain.class);//switches to Admin_Main
             Intent ITUser = new Intent(getApplicationContext(), ITUserMain.class);//switches to ITUser_Main
             if (success) {
                 //Returns userLevel from array needs the userLevel string to work
-
-
                     switch (UserLevel)
                     {
                         case "s": startActivity(Student);

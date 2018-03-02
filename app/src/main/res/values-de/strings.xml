@@ -33,4 +33,27 @@
     <string name="action_sign_in_short">Anmelden</string>
     <string name="action_sign_in">Einloggen oder Registrieren</string>
     <string name="prompt_password">Passwort</string>
+    <string name="enter_class_pin">Geben Sie den Pin der Klasse ein</string>
+    <string name="admin">Administrator</string>
+    <string name="submit">einreichen</string>
+    <string name="checked_in">Eingecheckt</string>
+    <string name="email_address">E-Mail-Addresse</string>
+    <string name="user_creation">Benutzererstellung</string>
+    <string name="create_new_user">Erstellen Sie einen neuen Benutzer</string>
+    <string name="it_task_menu">IT-Aufgabenmenü</string>
+    <string name="remove_pin">Entfernen Sie den Stift</string>
+    <string name="exit">Ausgang</string>
+    <string name="wrong_pin_number">Falsche PIN-Nummer</string>
+    <string name="checkin_success">Erfolgreich eingecheckt</string>
+    <string name="location_null">Der aktuelle Standort ist null. Standardeinstellungen verwenden</string>
+    <string name="professor">Professor</string>
+    <string name="IT">Internet technologie</string>
+    <string name="check_location_perms">Bitte überprüfen Sie die Standortgenehmigung</string>
+    <string name="no_location">Kein Standort erkannt</string>
+    <string name="display_permission_for_context">Berechtigungskonzept anzeigen, um zusätzlichen Kontext bereitzustellen.</string>
+    <string name="requesting_permission">Berechtigung anfordern</string>
+    <string name="user_interaction_cancelled">Benutzerinteraktion wurde abgebrochen.</string>
+    <string name="perm_granted">Erlaubnis erteilt.</string>
+    <string name="student">Schüler</string>
+    <string name="drop_pin">Stift fallen lassen</string>
 </resources>
