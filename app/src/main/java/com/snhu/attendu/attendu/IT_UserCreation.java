@@ -1,11 +1,23 @@
 package com.snhu.attendu.attendu;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.lang.String;
 
 /**
  * Created by tyowe on 2/21/2018.
@@ -13,21 +25,157 @@ import android.widget.Spinner;
 
 public class IT_UserCreation extends AppCompatActivity {
 
-    private Spinner mDropdown = (Spinner) findViewById(R.id.typeDropdown);
+    private EditText mEmailView;
+    private EditText mPasswordView;
+    private Button mSubmit;
+    private View mProgressView;
+    private View mLoginFormView;
+    private Spinner mDropdown;
 
-    //User types for the drop down
-    String[] userTypes = new String[]{getString(R.string.student), getString(R.string.professor), getString(R.string.IT), getString(R.string.admin)};
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_it_user_creation);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.activity_it_user_creation, userTypes);
-        mDropdown.setAdapter(adapter);
+        mEmailView = (EditText) findViewById(R.id.emailText);
+        mPasswordView = (EditText) findViewById(R.id.passwordText);
+        mDropdown = (Spinner) findViewById(R.id.typeDropdown);
+        mSubmit = (Button) findViewById(R.id.submitButton);
+
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
+
+        addListenerOnButton();
+    }
+
+    public void addListenerOnButton() {
+        mSubmit = (Button) findViewById(R.id.submitButton);
+        mSubmit.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                  createUser();
+            }
+        });
+    }
+
+    private void createUser(){
+
+        boolean cancel = false;
+        View focusView = null;
+
+        TextView dropdownError = (TextView)mDropdown.getSelectedView();
+
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        String passwordEncrypted = PasswordDigest.encryptPassword(mPasswordView.toString());
+        String typeOfUser = String.valueOf(mDropdown.getSelectedItem());
+
+        mEmailView.setError(null);
+        mPasswordView.setError(null);
+        dropdownError.setError(null);
+
+        // Check for a valid password, if the user entered one.
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            focusView = mPasswordView;
+            cancel = true;
+            mPasswordView.setText("");
+        } else if (TextUtils.isEmpty(password)){
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
+            cancel = true;
+        }
+
+        if(mDropdown.getSelectedItemPosition() == 0) {
+            dropdownError.setError(getString(R.string.no_selection_user_type));
+            focusView = dropdownError;
+            cancel = true;
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            showProgress(true);
+
+            //TODO Write new user data to database
+
+        }
+    }
+
+    private boolean isEmailValid(String email) {
+
+        //TODO check here that a duplicate user is not being created
+
+        //Username must be snhu email account and have a name before it
+        return (email.endsWith("@snhu.edu")) && (email.length() > 9);
+    }
+
+    private boolean isPasswordValid(String password) {
+        //Password must contain 8 characters, contain a capitol letter, and a number
+        if (password.length() < 8)
+        {
+            mPasswordView.setError(getString(R.string.error_password_short));
+            return false;
+        }
+        else if(password.equals(password.toLowerCase()))
+        {
+            mPasswordView.setError(getString(R.string.error_passsword_uppercase));
+            return false;
+        }
+        else if (!password.matches(".*\\d+.*"))
+        {
+            mPasswordView.setError(getString(R.string.error_password_number));
+            return false;
+        }
+
+        return true;
     }
 
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
 }

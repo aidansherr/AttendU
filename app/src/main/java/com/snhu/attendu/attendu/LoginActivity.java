@@ -189,6 +189,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
+        } else if (TextUtils.isEmpty(password)){
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
         }
 
         // Check for a valid email address.
@@ -324,10 +328,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
         private String newUser;
-        private String filePath = "userData.txt";
         private SharedPreferences sharedPreferences;
         private String PREF_NAME = "prefs";
-
 
 
         UserLoginTask(String email, String password) {
@@ -337,7 +339,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             //username:password:s     where s is default student profile type.
             newUser = (mEmail + ":" + mPassword + ":s" + "/n");
         }
-
 
 
         @Override
@@ -355,6 +356,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail.toLowerCase())) {
                     // Account exists, return true if the password matches.
+                    //TODO Database check here
                     PasswordDigest pd = new PasswordDigest();
                     //return pieces[1].equals(pd.encryptPassword(mPassword));
                     if(pieces[1].equals(pd.encryptPassword(mPassword)))
@@ -369,6 +371,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             String[] pieces = credential.split(":");
             if (pieces[0].equals(mEmail.toLowerCase())) {
                 // Account exists, return true if the password matches.
+                //TODO check that encrypted password matches password stored in database
                 PasswordDigest pd = new PasswordDigest();
                 return pieces[1].equals(pd.encryptPassword(mPassword));
             }
@@ -386,14 +389,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("user", newUser);
             editor.apply();
-//            try{
-//                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("testUsers.txt", Context.MODE_PRIVATE));
-//                outputStreamWriter.write((mEmail + ":" + mPassword + "/n"));
-//                outputStreamWriter.close();
-//            }
-//            catch(IOException e){
-//                Log.e("Exception", "File write failed: " + e.toString());
-//            }
+
             return true;
         }
 
@@ -422,12 +418,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             break;
                     }
 
-
-
-
-
-
-
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -441,5 +431,3 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 }
-
-//

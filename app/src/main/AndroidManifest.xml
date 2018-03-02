@@ -50,6 +50,7 @@
         <activity android:name=".AdminMain" />
         <activity android:name=".ITUserMain">
         </activity>
+        <activity android:name=".Absence"/>
         <activity android:name=".IT_UserCreation"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
