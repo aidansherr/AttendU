@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import java.util.Random;
 import android.content.Intent;
@@ -61,6 +62,9 @@ public class SignInPin extends AppCompatActivity
         int randomNumber=GenerateCode();
         String random= Integer.toString(randomNumber);// casts it as a string for the TextView
         text.setText(random);
+        //Disable button
+        Button dropBtn = (Button) findViewById(R.id.DropPinButton);
+        dropBtn.setEnabled(false);
 
         CountDownTimer timer= new CountDownTimer(1800000,1)
         {

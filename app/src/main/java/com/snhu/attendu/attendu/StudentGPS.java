@@ -66,8 +66,8 @@ public class StudentGPS extends AppCompatActivity implements OnMapReadyCallback,
 
 
         Context context = getApplicationContext();
-        CharSequence text = "Wrong Pin Number";
-        CharSequence text2 = "Successfully Checked In";
+        CharSequence text = getString(R.string.wrong_pin_number);
+        CharSequence text2 = getString(R.string.checkin_success);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         Toast toast2 = Toast.makeText(context,text2,duration);
@@ -185,7 +185,7 @@ public class StudentGPS extends AppCompatActivity implements OnMapReadyCallback,
 
                         }else{
                             Log.w(TAG, "getLastLocationException", task.getException());
-                            showSnackbar("No Location Detected");
+                            showSnackbar(getString(R.string.no_location));
                         }
                     }
                 });
@@ -389,7 +389,7 @@ public class StudentGPS extends AppCompatActivity implements OnMapReadyCallback,
         // Provide an additional rationale to the user. This would happen if the user denied the
         // request previously, but didn't check the "Don't ask again" checkbox.
         if (shouldProvideRationale) {
-            Log.i(TAG, "Displaying permission rationale to provide additional context.");
+            Log.i(TAG, getString(R.string.display_permission_for_context));
             showSnackbar(R.string.permission_rationale, android.R.string.ok,
                     new View.OnClickListener() {
                         @Override
@@ -401,7 +401,7 @@ public class StudentGPS extends AppCompatActivity implements OnMapReadyCallback,
                         }
                     });
         } else {
-            Log.i(TAG, "Requesting permission");
+            Log.i(TAG, getString(R.string.requesting_permission));
             // Request permission. It's possible this can be auto answered if device policy
             // sets the permission in a given state or the user denied the permission
             // previously and checked "Never ask again".
@@ -422,9 +422,9 @@ public class StudentGPS extends AppCompatActivity implements OnMapReadyCallback,
             if (grantResults.length <= 0) {
                 // If user interaction was interrupted, the permission request is cancelled and you
                 // receive empty arrays.
-                Log.i(TAG, "User interaction was cancelled.");
+                Log.i(TAG, getString(R.string.user_interaction_cancelled));
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.i(TAG, "Permission granted.");
+                Log.i(TAG, getString(R.string.perm_granted));
                 performPendingGeofenceTask();
                 getLastLocation();
             } else {
