@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Professor extends BasicUser
 {
+    Professor()
+    {}
+
     Professor(String userName,List<Course> courses,String user)
     {
         this.userName=userName;

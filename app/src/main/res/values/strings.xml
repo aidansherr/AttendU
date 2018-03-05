@@ -8,6 +8,9 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is incorrect</string>
+    <string name="error_password_short">Must contain 8 or more characters</string>
+    <string name="error_passsword_uppercase">Must include a capitol</string>
+    <string name="error_password_number">Must contain a number</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -18,6 +21,40 @@
     <string name="title_activity_sign_in_page">SignInPage</string>
     <string name="title_activity_sign_in_maps">Map</string>
 
+
+    <!--Student Main-->
+    <string name="student_menu_form">Student Form</string>
+    <string name="report_absence">Report absence</string>
+    <string name="course_list">Course Listing</string>
+
+    <!--Absence-->
+    <string name="label_report_absence">Reporting absence for</string>
+    <string name="reason_type_prompt">Select a reason type</string>
+    <string-array name="reason_type">
+        <item>Select a reason type</item>
+        <item>Unexcused</item>
+        <item>Emergency</item>
+        <item>School Related</item>
+    </string-array>
+
+
+
+    <!--IT Menu-->
+    <string name="it_menu">IT Task Menu</string>
+    <string name="create_user">Create new user</string>
+
+
+    <!-- User Creation strings -->
+    <string name="user_type_prompt">Choose a user type</string>
+    <string name="submit">Submit</string>
+    <string-array name="user_type">
+        <item>Select a user type</item>
+        <item>Student</item>
+        <item>Professor</item>
+        <item>IT</item>
+        <item>Admin</item>
+    </string-array>
+    <string name="label_user_creation">User Creation</string>
 
     <!-- Buttons strings -->
     <string name="add_geofences">Add geofences</string>
@@ -48,6 +85,7 @@
     Click notification to return to app
 </string>
 
+    <string name="no_selection_user_type">Specify user type</string>
     <string name="insufficient_permissions">Insufficient permissions.</string>
     <string name="permission_rationale1">Location permission is needed for core functionality</string>
     <string name="permission_denied_explanation">Permission was denied, but is needed for core
