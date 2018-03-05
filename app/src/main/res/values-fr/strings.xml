@@ -56,5 +56,18 @@
     <string name="location_null">L\'emplacement actuel est null. Utiliser les valeurs par défaut.</string>
     <string name="student">étudiant</string>
     <string name="drop_pin">Créer un marqueur</string>
+    <string name="error_passsword_uppercase">Doit inclure une capitale</string>
+    <string name="error_password_number">Doit contenir un nombre</string>
+    <string name="student_menu_form">Formulaire d\'étudiant</string>
+    <string name="report_absence">Signaler l\'absence</string>
+    <string name="course_list">Liste des cours</string>
+    <string name="label_report_absence">Signalement d\'absence pour</string>
+    <string name="reason_type_prompt">Sélectionnez un type de raison</string>
+    <string name="it_menu">Menu Tâche de la IT</string>
+    <string name="create_user">Créer un nouvel utilisateur</string>
+    <string name="user_type_prompt">Choisissez un type d\'utilisateur</string>
+    <string name="label_user_creation">Création d\'utilisateur</string>
+    <string name="no_selection_user_type">Spécifiez le type d\'utilisateur</string>
+    <string name="error_password_short">Doit contenir 8 caractères ou plus</string>
 
 </resources>

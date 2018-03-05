@@ -57,4 +57,17 @@
     <string name="location_null">La ubicación actual es nula. Usando los valores predeterminados.</string>
     <string name="student">Estudiante</string>
     <string name="drop_pin">Pin de caída</string>
+    <string name="error_password_short">Debe contener 8 o más caracteres</string>
+    <string name="error_passsword_uppercase">Debe incluir un capitolio</string>
+    <string name="error_password_number">Debe contener un número</string>
+    <string name="student_menu_form">Formulario de estudiante</string>
+    <string name="report_absence">Informe de ausencia</string>
+    <string name="course_list">Lista de cursos</string>
+    <string name="label_report_absence">Informar la ausencia de</string>
+    <string name="reason_type_prompt">Seleccione un tipo de razón</string>
+    <string name="it_menu">Menú de tareas de IT</string>
+    <string name="create_user">Crear nuevo usuario</string>
+    <string name="user_type_prompt">Elija un tipo de usuario</string>
+    <string name="label_user_creation">Creación de usuario</string>
+    <string name="no_selection_user_type">Especifique el tipo de usuario</string>
 </resources>

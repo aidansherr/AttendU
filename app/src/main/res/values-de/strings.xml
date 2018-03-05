@@ -56,4 +56,17 @@
     <string name="perm_granted">Erlaubnis erteilt.</string>
     <string name="student">Schüler</string>
     <string name="drop_pin">Stift fallen lassen</string>
+    <string name="error_password_short">Muss 8 oder mehr Zeichen enthalten</string>
+    <string name="error_passsword_uppercase">Muss ein Kapitol enthalten</string>
+    <string name="error_password_number">Muss eine Nummer enthalten</string>
+    <string name="student_menu_form">Studentenformular</string>
+    <string name="report_absence">Abwesenheit melden</string>
+    <string name="course_list">Kursliste</string>
+    <string name="label_report_absence">Abwesenheit melden für</string>
+    <string name="reason_type_prompt">Wählen Sie einen Grundtyp aus</string>
+    <string name="it_menu">IT Aufgabenmenü</string>
+    <string name="create_user">Erstelle einen neuen Benutzer</string>
+    <string name="user_type_prompt">Wählen Sie einen Benutzertyp</string>
+    <string name="label_user_creation">Benutzererstellung</string>
+    <string name="no_selection_user_type">Geben Sie den Benutzertyp an</string>
 </resources>

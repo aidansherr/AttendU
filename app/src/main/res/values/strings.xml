@@ -44,7 +44,6 @@
 
     <!-- User Creation strings -->
     <string name="user_type_prompt">Choose a user type</string>
-    <string name="submit">Submit</string>
     <string-array name="user_type">
         <item>Select a user type</item>
         <item>Student</item>
@@ -105,9 +104,9 @@
     <string name="requesting_permission">Requesting permission</string>
     <string name="user_interaction_cancelled">User interaction was cancelled.</string>
     <string name="perm_granted">Permission granted.</string>
-    <string name="submit">submit</string>
     <string name="student">Student</string>
     <string name="drop_pin">Drop Pin</string>
+    <string name="submit">Submit</string>
 
 
 </resources>
