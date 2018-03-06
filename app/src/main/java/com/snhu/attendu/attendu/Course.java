@@ -1,8 +1,7 @@
 package com.snhu.attendu.attendu;
 
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * Created by Travis on 10/11/2017.
@@ -17,7 +16,7 @@ public class Course
     //String random = Integer.toString(pin.GenerateCode());
     public Course()
     {
-        addCourse();
+
     }
     Course(String className)
     {
@@ -39,15 +38,7 @@ public class Course
     {
         return courseCheckinAvailable;
     }
-    void addCourse()
-    {
-        FirebaseDatabase mDatabase;
-        mDatabase= FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=mDatabase.getReference();
 
-        databaseReference.child("Course").child("Course_ID").child("Course_Name").setValue(getClassName());
-
-    }
 
     private
 
