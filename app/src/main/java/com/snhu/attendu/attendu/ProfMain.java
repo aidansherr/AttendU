@@ -21,13 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-import static android.R.interpolator.linear;
-
 public class
 ProfMain extends AppCompatActivity
 {
-    final List<Course> courses= new ArrayList<Course>();
+
     Professor newUser;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,38 +56,7 @@ ProfMain extends AppCompatActivity
             }
         });
 
-        /*
-        databaseReference.child("Course").child("CourseID").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot child:children)
-                {
-                    Course value = child.getValue(Course.class);
-                    courses.add(value);
-
-                }
-                newUser= new Professor("Tyler",courses,"P");
-                makeButtons();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        */
-
-        //courses.add(english);
-        //courses.add(cs);
-
-        //courses.get(1).setCourseAvailability(true);
-        //databaseReference.child("Course").child("CourseID").setValue("True");
-
-
-        //newUser=databaseReference.child("Professor").child("Professor_ID").child("L6wYHVXCEmbaDIPWfG");
-        //databaseReference.child("Professor").child("Professor_ID").push().setValue(newUser);
+        
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_prof_main);
