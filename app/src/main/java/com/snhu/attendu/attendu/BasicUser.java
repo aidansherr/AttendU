@@ -65,5 +65,15 @@ List<Course> classSchedule = new ArrayList<Course>();
     {
         return user;
     }
+    void setUserName(String name)
+    {
+        userName=name;
+    }
+    void setUserType(String type)
+    {
+        user=type;
+    }
+
+
 
 }

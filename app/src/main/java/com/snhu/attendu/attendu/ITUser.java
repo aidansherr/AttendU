@@ -10,5 +10,10 @@ public class ITUser extends BasicUser
     {
         user="i";
     }
+    ITUser( String name)
+    {
+        name=userName;
+        user="i";
+    }
 
 }

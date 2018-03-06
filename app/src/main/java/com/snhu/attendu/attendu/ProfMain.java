@@ -41,6 +41,8 @@ ProfMain extends AppCompatActivity
 
 
 
+
+
 //This pulls the professor object from the database and uses that object to load buttons based on the Professors courses
         databaseReference.child("Professor").child("Professor_ID").child("-L6SwYHVXCEmbaDIPWfG").addValueEventListener(new ValueEventListener() {
             @Override
