@@ -69,4 +69,8 @@
     <string name="user_type_prompt">Wählen Sie einen Benutzertyp</string>
     <string name="label_user_creation">Benutzererstellung</string>
     <string name="no_selection_user_type">Geben Sie den Benutzertyp an</string>
+    <string name="date_select">Wählen Sie ein Datum</string>
+    <string name="no_selection_excuse_type">Geben Sie eine Ausrede an</string>
+    <string name="no_selection_date">Wählen Sie das Abwesenheitsdatum aus</string>
+    <string name="out_of_class_range">Nicht im Klassenzimmer</string>
 </resources>

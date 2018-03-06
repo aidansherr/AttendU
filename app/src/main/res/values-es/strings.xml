@@ -70,4 +70,8 @@
     <string name="user_type_prompt">Elija un tipo de usuario</string>
     <string name="label_user_creation">Creación de usuario</string>
     <string name="no_selection_user_type">Especifique el tipo de usuario</string>
+    <string name="date_select">Elige una fecha</string>
+    <string name="no_selection_excuse_type">Especifique una excusa</string>
+    <string name="no_selection_date">Seleccione la fecha de ausencia</string>
+    <string name="out_of_class_range">No en el rango de aula</string>
 </resources>

@@ -69,5 +69,9 @@
     <string name="label_user_creation">Création d\'utilisateur</string>
     <string name="no_selection_user_type">Spécifiez le type d\'utilisateur</string>
     <string name="error_password_short">Doit contenir 8 caractères ou plus</string>
+    <string name="date_select">Choisissez une date</string>
+    <string name="no_selection_excuse_type">Spécifiez une excuse</string>
+    <string name="no_selection_date">Sélectionnez la date d\'absence</string>
+    <string name="out_of_class_range">Pas dans la gamme de la salle de classe</string>
 
 </resources>

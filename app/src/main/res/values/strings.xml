@@ -107,6 +107,10 @@
     <string name="student">Student</string>
     <string name="drop_pin">Drop Pin</string>
     <string name="submit">Submit</string>
+    <string name="date_select">Choose a date</string>
+    <string name="no_selection_excuse_type">Specify an excuse</string>
+    <string name="no_selection_date">Select date of absence</string>
+    <string name="out_of_class_range">Not In Range Of Classroom</string>
 
 
 </resources>

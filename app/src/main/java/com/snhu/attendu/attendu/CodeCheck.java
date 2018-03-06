@@ -83,21 +83,33 @@ public class CodeCheck extends AppCompatActivity implements
         Context context = getApplicationContext();
         CharSequence text = getString(R.string.wrong_pin_number);
         CharSequence text2 = getString(R.string.checkin_success);
+        CharSequence text3 = getString(R.string.out_of_class_range);
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         Toast toast2 = Toast.makeText(context,text2,duration);
+        Toast toast3 = Toast.makeText(context,text3,duration);
+
 
         if(course.random.equals(userPinCode))
         {
             codeCheck = true;
-            userCheck.setChecked(true);
-            toast2.show(); //output that the user has signed in
         }
         else
         {
             //output that the pin did not match professor pin
             toast.show();
         }
+        if(!isInsideGeofence)
+        {
+            toast3.show(); //output the student is not in classroom range
+        }
+
+        if(codeCheck && isInsideGeofence)
+        {
+            userCheck.setChecked(true);
+            toast2.show(); //output that the user has signed in
+        }
+
     }
 
     /**
