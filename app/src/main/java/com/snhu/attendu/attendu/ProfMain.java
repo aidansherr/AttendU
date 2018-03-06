@@ -10,39 +10,57 @@ import android.widget.TableLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-
-import static android.R.interpolator.linear;
-
 public class
 ProfMain extends AppCompatActivity
 {
-    List<Course> courses= new ArrayList<Course>();
+
     Professor newUser;
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
     {
+        FirebaseDatabase mDatabase;
+        mDatabase= FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
-        Course math=new Course("Math");
-        Course english=new Course("English");
-        Course cs= new Course("Junior lab");
 
-        courses.add(math);
-        courses.add(english);
-        courses.add(cs);
 
-        courses.get(1).setCourseAvailability(true);
 
-        newUser= new Professor("Tyler",courses,"P");
+
+
+
+//This pulls the professor object from the database and uses that object to load buttons based on the Professors courses
+        databaseReference.child("Professor").child("Professor_ID").child("-L6SwYHVXCEmbaDIPWfG").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Professor value = dataSnapshot.getValue(Professor.class);
+                newUser=new Professor(value.getUserName(),value.getClassList(),value.getUser());
+                makeButtons(newUser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_prof_main);
-        makeButtons();
+
     }
     public void openPinWindow(View view)
     {
@@ -50,17 +68,17 @@ ProfMain extends AppCompatActivity
         startActivity(inten);
     }
 
-    public void makeButtons()
+    public void makeButtons(Professor newUser)
     {
         final Intent inten= new Intent(this,SignInPin.class);
 
-
-        for(int i=0;i<courses.size();i++)
+        List<Course> profList= newUser.getClassList();
+        for(int i=0;i<profList.size();i++)
         {
             TableRow row = new TableRow(this);
             TableLayout tableLayout = (TableLayout)findViewById(R.id.TableLayout);
             Button btn= new Button(this);
-            btn.setText(newUser.getClassName(courses.get(i)));
+            btn.setText(newUser.getClassName(profList.get(i)));
             btn.setHeight(150);
             btn.setWidth(100);
             btn.setOnClickListener(new View.OnClickListener()
@@ -75,7 +93,7 @@ ProfMain extends AppCompatActivity
             tableLayout.addView(row);
             row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.MATCH_PARENT,1.0f));
             row.addView(btn);
-            if (courses.get(i).getCourseAvailibility() == true)
+            if (profList.get(i).getCourseAvailibility() == true)
             {
                 btn.setBackgroundColor(Color.GREEN);
             }
