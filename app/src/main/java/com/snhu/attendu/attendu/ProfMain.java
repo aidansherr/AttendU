@@ -35,9 +35,25 @@ ProfMain extends AppCompatActivity
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
+        Course math=new Course("Math");
+        Course cs= new Course("Lab");
+        Course english= new Course("English");
 
+        List<Course> classes= new ArrayList<>();
 
+        classes.add(math);
+        classes.add(cs);
+        classes.add(english);
 
+        Professor prof=new Professor("Tyler","prof.test@snhu.edu","94dcc9b1e739b7ca13d0e390d3d719ddaa223156",classes,"p");
+        Student student=new Student("Tom","Tom.Brady@snhu.edu","b240a280af5b8e08ca06917dae3fd0f1a7fae49b",classes,"p");
+        Admin ad=new Admin("Dan","prof.test@snhu.edu","ec159d78f6c5de4c7c2d5f4933ce76b9583e1022");
+        ITUser it=new ITUser("Jeff","prof.test@snhu.edu","41589fdd0f4220c50eab22259d45629b5bb0848f");
+
+        databaseReference.child("Professor").child("Professor_ID").push().setValue(prof);
+        databaseReference.child("Student").child("Student_ID").push().setValue(student);
+        databaseReference.child("Admin").child("Admin_ID").push().setValue(ad);
+        databaseReference.child("IT_user").child("IT_User_ID").push().setValue(it);
 
 
 
@@ -48,7 +64,7 @@ ProfMain extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Professor value = dataSnapshot.getValue(Professor.class);
-                newUser=new Professor(value.getUserName(),value.getClassList(),value.getUser());
+                newUser=value;
                 makeButtons(newUser);
             }
 
