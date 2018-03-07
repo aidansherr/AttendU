@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdminMain" />
-        <activity android:name=".ITUserMain"></activity>
+        <activity android:name=".ITUserMain" />
         <activity android:name=".Absence" />
         <activity android:name=".IT_UserCreation" />
         <!--
@@ -75,6 +75,8 @@
 
         <service android:name=".GeofenceTransitionsIntentService" />
 
+        <activity android:name=".ProfessorDataRetreiveActivity" />
+        <activity android:name=".GetUsersActivity"></activity>
     </application>
 
 </manifest>
