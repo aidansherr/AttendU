@@ -4,6 +4,7 @@ package com.snhu.attendu.attendu;
 import android.content.Intent;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 
 
 import static android.support.v4.content.ContextCompat.startActivity;
@@ -12,7 +13,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
  * Created by Travis on 10/11/2017.
  */
 
-public class BasicUser
+public class BasicUser implements Serializable
 {
 List<Course> classSchedule = new ArrayList<Course>();
     
