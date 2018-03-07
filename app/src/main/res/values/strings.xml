@@ -36,7 +36,6 @@
     </string-array>
 
 
-
     <!--IT Menu-->
     <string name="it_menu">IT Task Menu</string>
     <string name="create_user">Create new user</string>
@@ -111,6 +110,12 @@
     <string name="no_selection_excuse_type">Specify an excuse</string>
     <string name="no_selection_date">Select date of absence</string>
     <string name="out_of_class_range">Not In Range Of Classroom</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="success_absence">Successfully reported absence</string>
+    <string name="unexcused">Unexcused</string>
+    <string name="emergency">Emergency</string>
+    <string name="school_related">School Related</string>
 
 
 </resources>

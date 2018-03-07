@@ -1,20 +1,14 @@
 package com.snhu.attendu.attendu;
 
-import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * Created by tyowe on 2/23/2018.
@@ -23,13 +17,16 @@ import java.util.Locale;
 public class Absence extends AppCompatActivity{
 
     private TextView mCourseLabel;
-    private Spinner mDropdown;
+    private TextView mDropdown;
     private TextView mDateSelect;
-    private DatePickerDialog mDateDialog;
-    private Calendar newDate;
-    private Calendar calendar;
     private Button mSubmitButton;
     private View mAbsenceFormView;
+
+    AlertDialog.Builder excuseBuilder;
+    AlertDialog.Builder dateBuilder;
+
+    private boolean isExcuseSelected;
+    private boolean isDateSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -38,6 +35,9 @@ public class Absence extends AppCompatActivity{
 
         Intent prevIntent = getIntent(); // gets the previously created intent
         String courseName = prevIntent.getStringExtra("courseName");
+
+        isDateSelected = false;
+        isExcuseSelected = false;
 
         mAbsenceFormView = findViewById(R.id.absence_form);
         mCourseLabel = (TextView) findViewById(R.id.course_name_label);
@@ -51,43 +51,90 @@ public class Absence extends AppCompatActivity{
             }
         });
 
-        newDate = null;
-        calendar = Calendar.getInstance();
+        setupDateSelection();
+        setupExcuseSelection();
 
         mDateSelect = (TextView) findViewById(R.id.date_select);
         mDateSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDateDialog.show();
+                dateBuilder.show();
+               }
+        });
+
+        mDropdown = (TextView) findViewById(R.id.reason_dropdown);
+        mDropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                excuseBuilder.show();
+            }
+        });
+    }
+
+    void setupExcuseSelection()
+    {
+        excuseBuilder = new AlertDialog.Builder(this);
+        excuseBuilder.setIcon(R.drawable.ic_priority);
+        excuseBuilder.setTitle(R.string.no_selection_excuse_type);
+        final ArrayAdapter<String> arrayAdapter1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_selectable_list_item);
+
+        arrayAdapter1.add(getString(R.string.unexcused));
+        arrayAdapter1.add(getString(R.string.emergency));
+        arrayAdapter1.add(getString(R.string.school_related));
+
+        excuseBuilder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
 
-        //TODO custom date picker for disabled dates
-        mDateDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        excuseBuilder.setAdapter(arrayAdapter1, new DialogInterface.OnClickListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                mDateDialog.updateDate(year, monthOfYear, dayOfMonth);
-                newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                showSelectedDate();
+            public void onClick(DialogInterface dialog, int which) {
+                String chosenExcuse = arrayAdapter1.getItem(which);
+                isExcuseSelected = true;
+                mDropdown.setText(chosenExcuse);
             }
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-
-        mDropdown = (Spinner) findViewById(R.id.reason_dropdown);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.reason_type, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mDropdown.setAdapter(adapter);
+        });
     }
 
-
-    void showSelectedDate()
+    void setupDateSelection()
     {
-        String formattedDate;
-        SimpleDateFormat sdf = new SimpleDateFormat("E, MMM d, yyyy");
-        formattedDate = sdf.format(newDate.getTime());
-        mDateSelect.setText(formattedDate);
+        dateBuilder = new AlertDialog.Builder(this);
+        dateBuilder.setIcon(R.drawable.ic_date_range);
+        dateBuilder.setTitle(R.string.no_selection_date);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_selectable_list_item);
+
+        //TODO load previous classes from database here
+        arrayAdapter.add("Dummy Date 1"); //TODO delete me
+        arrayAdapter.add("Dummy Date 2"); //And me
+
+        dateBuilder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        dateBuilder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String chosenDate = arrayAdapter.getItem(which);
+                isDateSelected = true;
+                showSelectedDate(chosenDate);
+            }
+        });
+    }
+
+    void showSelectedDate(String chosenDate)
+    {
+        //String formattedDate;
+      //  SimpleDateFormat sdf = new SimpleDateFormat("E, MMM d, yyyy");
+       // formattedDate = sdf.format(newDate.getTime());
+        mDateSelect.setText(chosenDate);
     }
 
     void reportAbsence()
@@ -95,19 +142,18 @@ public class Absence extends AppCompatActivity{
         boolean cancel = false;
         View focusView = null;
 
-        TextView dropdownError = (TextView) mDropdown.getSelectedView();
 
         mDateSelect.setError(null);
-        dropdownError.setError(null);
+        mDropdown.setError(null);
 
-        if(mDropdown.getSelectedItemPosition() == 0)
+        if(isExcuseSelected == false)
         {
-            dropdownError.setError(getString(R.string.no_selection_excuse_type));
-            focusView = dropdownError;
+            mDropdown.setError(getString(R.string.no_selection_excuse_type));
+            focusView = mDropdown;
             cancel = true;
         }
 
-        if(newDate == null)
+        if(isDateSelected == false)
         {
             mDateSelect.setError(getString(R.string.no_selection_date));
             focusView = mDateSelect;
@@ -118,10 +164,19 @@ public class Absence extends AppCompatActivity{
             //Show field with error
             focusView.requestFocus();
         } else {
-           //show success message
-            //TODO show success message and switch back to activity
-
             //TODO Write absence to database
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle(R.string.success_absence)
+                    .setIcon(R.drawable.ic_done_black)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent studentIntent = new Intent(getApplicationContext(), StudentMain.class);
+                            startActivity(studentIntent);
+                        }
+                    });
+            builder.show();
         }
     }
 }
