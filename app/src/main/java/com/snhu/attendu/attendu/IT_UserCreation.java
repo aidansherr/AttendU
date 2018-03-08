@@ -4,8 +4,12 @@ package com.snhu.attendu.attendu;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +22,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.lang.String;
 
 /**
@@ -28,6 +35,7 @@ public class IT_UserCreation extends AppCompatActivity {
 
     private EditText mEmailView;
     private EditText mPasswordView;
+    private EditText mNameView;
     private Button mSubmit;
     private View mProgressView;
     private View mLoginFormView;
@@ -43,6 +51,7 @@ public class IT_UserCreation extends AppCompatActivity {
         mPasswordView = (EditText) findViewById(R.id.passwordText);
         mDropdown = (Spinner) findViewById(R.id.typeDropdown);
         mSubmit = (Button) findViewById(R.id.submitButton);
+        mNameView= (EditText) findViewById(R.id.nameText);
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -77,6 +86,7 @@ public class IT_UserCreation extends AppCompatActivity {
         String password = mPasswordView.getText().toString();
         String passwordEncrypted = PasswordDigest.encryptPassword(mPasswordView.toString());
         String typeOfUser = String.valueOf(mDropdown.getSelectedItem());
+        String name = mNameView.getText().toString();
 
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -119,7 +129,46 @@ public class IT_UserCreation extends AppCompatActivity {
 
             //TODO Write new user data to database
             //email, password encrypted, typeofUser
+
+            FirebaseDatabase mDatabase;
+            mDatabase= FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
+            switch (typeOfUser)
+            {
+                case "Student":
+                    Student newUser1= new Student(name,"s",email,passwordEncrypted);
+                    databaseReference.child("Student").child("Student_ID").push().setValue(newUser1);
+                    break;
+                case "Professor":
+                    Professor newUser2= new Professor(name,"p",email,passwordEncrypted);
+                    databaseReference.child("Professor").child("Professor_ID").push().setValue(newUser2);
+                    break;
+                case "Admin":
+                    Admin newUser3= new Admin(name,"a",email,passwordEncrypted);
+                    databaseReference.child("Admin").child("Admin_ID").push().setValue(newUser3);
+                    break;
+                case "IT":
+                    ITUser newUser4= new ITUser(name,"i",email,passwordEncrypted);
+                    databaseReference.child("IT_User").child("IT_User_ID").push().setValue(newUser4);
+                    break;
+                default:
+                    break;
+            }
         }
+        AlertDialog.Builder builder= new AlertDialog.Builder(IT_UserCreation.this);
+        builder.setTitle("Succsesful");
+        builder.setMessage("User created");
+        builder.setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Intent i= new Intent(IT_UserCreation.this,ITUserMain.class);
+                startActivity(i);
+            }
+        }).create().show();
+
+
+
     }
 
     private boolean isEmailValid(String email) {
