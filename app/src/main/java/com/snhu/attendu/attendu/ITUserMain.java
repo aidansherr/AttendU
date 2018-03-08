@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ITUserMain extends AppCompatActivity {
 
     private Button mCreateButton;
-    final ITUser newUser=new ITUser();
+     ITUser newUser=new ITUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,16 @@ public class ITUserMain extends AppCompatActivity {
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
-        databaseReference.child("IT_user").child("IT_User_ID").child("-L6xb8CWAoPQIk1mc9ee").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("IT_user").child("IT_User_ID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ITUser value = dataSnapshot.getValue(ITUser.class);
-                newUser.setUserName(value.getUserName());
-                newUser.setUserType(value.getUser());
+                Iterable<DataSnapshot> children= dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    ITUser value = child.getValue(ITUser.class);
+                    newUser=value;
 
-
+                }
             }
 
             @Override
