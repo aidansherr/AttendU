@@ -32,10 +32,30 @@ public class StudentMain extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         FirebaseDatabase mDatabase;
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
+
+
+        databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children=dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    Student value = child.getValue(Student.class);
+                    newUser=value;
+                }
+                makeButtons(newUser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
@@ -45,21 +65,7 @@ public class StudentMain extends AppCompatActivity {
 
         //TODO Read courses from database here and student
 
-        databaseReference.child("Student").child("Student_ID").child("-L6r1wPEIM_7FxA7CFDT").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Student value = dataSnapshot.getValue(Student.class);
 
-                newUser=new Student(value.getUserName(),value.getClassList(),value.getUser());
-                mStudentLabel.setText(newUser.getUserName());
-                makeButtons(newUser);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
 
