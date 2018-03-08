@@ -13,20 +13,49 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
+import com.google.firebase.database.ValueEventListener;
 
 public class StudentMain extends AppCompatActivity {
 
     private View mLayout;
     private TextView mStudentLabel;
 
-    List<Course> courses=new ArrayList<Course>();
+
     Student newUser;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        FirebaseDatabase mDatabase;
+        mDatabase= FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
+
+
+        databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children=dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    Student value = child.getValue(Student.class);
+                    newUser=value;
+                }
+                makeButtons(newUser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
@@ -36,20 +65,11 @@ public class StudentMain extends AppCompatActivity {
 
         //TODO Read courses from database here and student
 
-        Course math=new Course("Math");
-        Course english=new Course("English");
-        Course cs= new Course("Lab");
 
-        courses.add(math);
-        courses.add(english);
-        courses.add(cs);
 
-        courses.get(1).setCourseAvailability(true);
 
-        newUser= new Student("Tyler",courses,"P");
-        mStudentLabel.setText("Tom Brady");
 
-        makeButtons();
+
     }
 
     public void openPinWindow(View view)
@@ -61,7 +81,7 @@ public class StudentMain extends AppCompatActivity {
     private void reportAbsence(int num)
     {
         //TODO add parameters to new intent, reference to class
-        String courseAbName = courses.get(num).getClassName();
+        String courseAbName = newUser.getClassList().get(num).getClassName();
 
         Intent absenceIntent = new Intent(getApplicationContext(), Absence.class);
         absenceIntent.putExtra("courseName",courseAbName);
@@ -69,10 +89,10 @@ public class StudentMain extends AppCompatActivity {
     }
 
 
-    public void makeButtons()
+    public void makeButtons(Student newUser)
     {
        LinearLayout mParentLayout = (LinearLayout) findViewById(R.id.student_linear);
-
+        List<Course> courses=newUser.getClassList();
         for(int i=0;i<courses.size();i++)
         {
             LinearLayout dualView = new LinearLayout(getApplicationContext());

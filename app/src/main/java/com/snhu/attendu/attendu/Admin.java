@@ -6,8 +6,16 @@ package com.snhu.attendu.attendu;
 
 public class Admin extends BasicUser
 {
+
     Admin()
     {
         user="a";
     }
+    Admin( String newname)
+    {
+        newname=userName;
+        user="a";
+    }
+
+
 }

@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Student extends BasicUser
 {
+    Student()
+    {}
+
    Student(String userName, List<Course> courses, String user)
     {
         this.userName=userName;
