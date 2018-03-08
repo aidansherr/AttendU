@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AttendU.iml" filepath="$PROJECT_DIR$/AttendU.iml" />
       <module fileurl="file://C:\Users\tyowe\Desktop\AttendU1\AttendU1\AttendU.iml" filepath="C:\Users\tyowe\Desktop\AttendU1\AttendU1\AttendU.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/AttendU1.iml" filepath="$PROJECT_DIR$/.idea/AttendU1.iml" />
+      <module fileurl="file://C:\Users\Travis Guthrie\Documents\AttendU\AttendU\.idea\AttendU1.iml" filepath="C:\Users\Travis Guthrie\Documents\AttendU\AttendU\.idea\AttendU1.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/datePickerCustom/datePickerCustom.iml" filepath="$PROJECT_DIR$/datePickerCustom/datePickerCustom.iml" />
     </modules>

@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,9 +23,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+import static android.R.interpolator.linear;
+
 public class
 ProfMain extends AppCompatActivity
 {
+
+
+    private View mLayout;
+    private TextView mProfLabel;
+
 
     Professor newUser;
     @Override
@@ -35,36 +45,22 @@ ProfMain extends AppCompatActivity
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
-        Course math=new Course("Math");
-        Course cs= new Course("Lab");
-        Course english= new Course("English");
-
-        List<Course> classes= new ArrayList<>();
-
-        classes.add(math);
-        classes.add(cs);
-        classes.add(english);
-
-        Professor prof=new Professor("Tyler","prof.test@snhu.edu","94dcc9b1e739b7ca13d0e390d3d719ddaa223156",classes,"p");
-        Student student=new Student("Tom","Tom.Brady@snhu.edu","b240a280af5b8e08ca06917dae3fd0f1a7fae49b",classes,"p");
-        Admin ad=new Admin("Dan","prof.test@snhu.edu","ec159d78f6c5de4c7c2d5f4933ce76b9583e1022");
-        ITUser it=new ITUser("Jeff","prof.test@snhu.edu","41589fdd0f4220c50eab22259d45629b5bb0848f");
-
-        databaseReference.child("Professor").child("Professor_ID").push().setValue(prof);
-        databaseReference.child("Student").child("Student_ID").push().setValue(student);
-        databaseReference.child("Admin").child("Admin_ID").push().setValue(ad);
-        databaseReference.child("IT_user").child("IT_User_ID").push().setValue(it);
-
 
 
 
 
 //This pulls the professor object from the database and uses that object to load buttons based on the Professors courses
-        databaseReference.child("Professor").child("Professor_ID").child("-L6SwYHVXCEmbaDIPWfG").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Professor").child("Professor_ID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Professor value = dataSnapshot.getValue(Professor.class);
-                newUser=value;
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    Professor value = child.getValue(Professor.class);
+                    newUser=(value);
+
+                }
+
                 makeButtons(newUser);
             }
 
@@ -74,10 +70,14 @@ ProfMain extends AppCompatActivity
             }
         });
 
-        
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_prof_main);
+        mLayout = findViewById(R.id.prof_linear);
+        mProfLabel = (TextView) findViewById(R.id.prof_label);
+
+
 
     }
     public void openPinWindow(View view)
@@ -89,31 +89,56 @@ ProfMain extends AppCompatActivity
     public void makeButtons(Professor newUser)
     {
         final Intent inten= new Intent(this,SignInPin.class);
-
+        LinearLayout mParentLayout = (LinearLayout) findViewById(R.id.prof_linear);
         List<Course> profList= newUser.getClassList();
+
         for(int i=0;i<profList.size();i++)
         {
-            TableRow row = new TableRow(this);
-            TableLayout tableLayout = (TableLayout)findViewById(R.id.TableLayout);
+            LinearLayout dualView = new LinearLayout(getApplicationContext());
+            mParentLayout.addView(dualView);
+            dualView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            dualView.setOrientation(LinearLayout.HORIZONTAL);
+
             Button btn= new Button(this);
             btn.setText(newUser.getClassName(profList.get(i)));
             btn.setHeight(150);
             btn.setWidth(100);
+
+            LinearLayout.LayoutParams buttonParams =
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+
+            buttonParams.weight = 1;
+            btn.setLayoutParams(buttonParams);
+            buttonParams.setMargins(0,60,0,0);
+            btn.setId(i);
+
+            btn.setText(newUser.getClassName(profList.get(i)));
+
+            dualView.addView(btn);
+
+
             btn.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View view)
-            {
-                openPinWindow(view);
-            }
-
+                {
+                    openPinWindow(view);
+                }
             });
-            tableLayout.addView(row);
-            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.MATCH_PARENT,1.0f));
-            row.addView(btn);
+
+
+
             if (profList.get(i).getCourseAvailibility() == true)
+
+
+            if (profList.get(i).getCourseAvailibility() == true)
+
             {
-                btn.setBackgroundColor(Color.GREEN);
+                btn.setBackgroundColor(Color.rgb(50, 205, 50)); //GREEN
+            }
+            else
+            {
+                btn.setBackgroundColor(Color.rgb(220, 220 ,220)); //GRAY
             }
         }
     }
