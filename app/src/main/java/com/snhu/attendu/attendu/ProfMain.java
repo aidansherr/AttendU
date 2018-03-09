@@ -36,6 +36,7 @@ ProfMain extends AppCompatActivity
 
 
     Professor newUser;
+    List<Professor> professors = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
@@ -57,11 +58,11 @@ ProfMain extends AppCompatActivity
                 for (DataSnapshot child:children)
                 {
                     Professor value = child.getValue(Professor.class);
-                    newUser=(value);
+                   professors.add(value);
 
                 }
 
-                makeButtons(newUser);
+                makeButtons(professors.get(0));
             }
 
             @Override
@@ -91,7 +92,6 @@ ProfMain extends AppCompatActivity
         final Intent inten= new Intent(this,SignInPin.class);
         LinearLayout mParentLayout = (LinearLayout) findViewById(R.id.prof_linear);
         List<Course> profList= newUser.getClassList();
-
         for(int i=0;i<profList.size();i++)
         {
             LinearLayout dualView = new LinearLayout(getApplicationContext());
