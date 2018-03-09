@@ -29,7 +29,7 @@ public class StudentMain extends AppCompatActivity {
 
 
     Student newUser;
-
+    List<Student> students = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,9 +46,9 @@ public class StudentMain extends AppCompatActivity {
                 for (DataSnapshot child:children)
                 {
                     Student value = child.getValue(Student.class);
-                    newUser=value;
+                    students.add(value);
                 }
-                makeButtons(newUser);
+                makeButtons(students.get(0));
             }
 
             @Override
@@ -66,15 +66,13 @@ public class StudentMain extends AppCompatActivity {
         //TODO Read courses from database here and student
 
 
-
-
-
-
     }
 
     public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,CodeCheck.class);
+
+        inten.putExtra("Student",newUser);
         startActivity(inten);
     }
 
@@ -100,7 +98,7 @@ public class StudentMain extends AppCompatActivity {
             dualView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             dualView.setOrientation(LinearLayout.HORIZONTAL);
 
-            Button btn= new Button(this);
+            final Button btn= new Button(this);
             final Button absenceBtn = new Button (this);
             LinearLayout.LayoutParams buttonParams =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
