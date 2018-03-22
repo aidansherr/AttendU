@@ -80,11 +80,12 @@ public class IT_UserCreation extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
+        PasswordDigest pd= new PasswordDigest();
         TextView dropdownError = (TextView)mDropdown.getSelectedView();
 
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-        String passwordEncrypted = PasswordDigest.encryptPassword(mPasswordView.toString());
+        String passwordEncrypted = pd.encryptPassword(password);
         String typeOfUser = String.valueOf(mDropdown.getSelectedItem());
         String name = mNameView.getText().toString();
 
@@ -154,6 +155,7 @@ public class IT_UserCreation extends AppCompatActivity {
                 default:
                     break;
             }
+
         }
         AlertDialog.Builder builder= new AlertDialog.Builder(IT_UserCreation.this);
         builder.setTitle("Succsesful");
@@ -167,7 +169,8 @@ public class IT_UserCreation extends AppCompatActivity {
             }
         }).create().show();
 
-
+        Intent i = new Intent(IT_UserCreation.this, GetUsersActivity.class);
+        startActivity(i);
 
     }
 
