@@ -88,6 +88,9 @@ public class GetUsersActivity extends AppCompatActivity {
                     allUsers.addAdmin(value);
                 }
 
+
+
+
                 Intent i = new Intent(GetUsersActivity.this, LoginActivity.class);
                 i.putExtra("AllUsers",allUsers);
                 startActivity(i);

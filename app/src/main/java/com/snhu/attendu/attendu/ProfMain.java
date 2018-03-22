@@ -36,7 +36,6 @@ ProfMain extends AppCompatActivity
 
 
     Professor newUser;
-    List<Professor> professors = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
@@ -47,7 +46,8 @@ ProfMain extends AppCompatActivity
 
 
 
-
+        Intent i= getIntent();
+        newUser= (Professor) i.getSerializableExtra("Professor");
 
 
 //This pulls the professor object from the database and uses that object to load buttons based on the Professors courses
@@ -57,12 +57,10 @@ ProfMain extends AppCompatActivity
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                 for (DataSnapshot child:children)
                 {
-                    Professor value = child.getValue(Professor.class);
-                   professors.add(value);
 
                 }
 
-                makeButtons(professors.get(0));
+                makeButtons(newUser);
             }
 
             @Override
@@ -70,6 +68,7 @@ ProfMain extends AppCompatActivity
 
             }
         });
+
 
 
         super.onCreate(savedInstanceState);
@@ -92,10 +91,11 @@ ProfMain extends AppCompatActivity
         final Intent inten= new Intent(this,SignInPin.class);
         LinearLayout mParentLayout = (LinearLayout) findViewById(R.id.prof_linear);
         List<Course> profList= newUser.getClassList();
+
         for(int i=0;i<profList.size();i++)
-        {
+            {
             LinearLayout dualView = new LinearLayout(getApplicationContext());
-            mParentLayout.addView(dualView);
+           mParentLayout.addView(dualView);
             dualView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             dualView.setOrientation(LinearLayout.HORIZONTAL);
 

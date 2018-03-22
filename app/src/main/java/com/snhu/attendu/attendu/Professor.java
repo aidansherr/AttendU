@@ -11,6 +11,13 @@ public class Professor extends BasicUser
     Professor()
     {}
 
+    Professor(String userName,String user,String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.user = user;
+    }
+
     Professor(String userName,List<Course> courses,String user)
     {
         this.userName=userName;

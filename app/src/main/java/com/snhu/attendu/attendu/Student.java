@@ -11,6 +11,13 @@ public class Student extends BasicUser
     Student()
     {}
 
+    Student(String userName,String user,String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.user = user;
+    }
+
    Student(String userName, List<Course> courses, String user)
     {
         this.userName=userName;

@@ -63,8 +63,8 @@
     <string name="geofence_not_available">Geofence service is not available now</string>
     <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
     <string name="geofence_too_many_pending_intents">" You have provided too many PendingIntents to the addGeofences() call     "</string>
-        <string name="unknown_geofence_error">"Unknown error: the Geofence service is not available now     "</string>
-        <string name="geofence_transition_invalid_type">"Geofence transition error: invalid transition type %1$d     "</string>
+    <string name="unknown_geofence_error">"Unknown error: the Geofence service is not available now     "</string>
+    <string name="geofence_transition_invalid_type">"Geofence transition error: invalid transition type %1$d     "</string>
 
     <!-- Transition type strings -->
     <string name="geofence_transition_entered">Entered</string>
@@ -116,6 +116,7 @@
     <string name="unexcused">Unexcused</string>
     <string name="emergency">Emergency</string>
     <string name="school_related">School Related</string>
+    <string name="title_activity_get_users">GetUsersActivity</string>
 
 
 </resources>

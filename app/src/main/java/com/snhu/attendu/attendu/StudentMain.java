@@ -38,6 +38,9 @@ public class StudentMain extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
+        Intent i= getIntent();
+        newUser= (Student) i.getSerializableExtra("Student");
+
 
         databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
             @Override
@@ -48,7 +51,8 @@ public class StudentMain extends AppCompatActivity {
                     Student value = child.getValue(Student.class);
                     students.add(value);
                 }
-                makeButtons(students.get(0));
+
+                makeButtons(newUser);
             }
 
             @Override
