@@ -27,64 +27,37 @@ public class StudentMain extends AppCompatActivity {
     private View mLayout;
     private TextView mStudentLabel;
 
-<<<<<<< HEAD
-    List<Course> courses=new ArrayList<Course>();
-    Student newUser;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
 
     Student newUser;
     List<Student> students = new ArrayList<>();
->>>>>>> 2dea3b17863775da2f07906ee4367ddb48b68e8a
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         FirebaseDatabase mDatabase;
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
-<<<<<<< HEAD
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-
-        mLayout = findViewById(R.id.student_linear);
-        mStudentLabel = (TextView) findViewById(R.id.student_label);
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-        //TODO Read courses from database here and student
-=======
         Intent i= getIntent();
         newUser= (Student) i.getSerializableExtra("Student");
 
->>>>>>> 2dea3b17863775da2f07906ee4367ddb48b68e8a
 
-        databaseReference.child("Student").child("Student_ID").child("-L6r1wPEIM_7FxA7CFDT").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Student value = dataSnapshot.getValue(Student.class);
+                Iterable<DataSnapshot> children=dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    Student value = child.getValue(Student.class);
+                    students.add(value);
+                }
 
-                newUser=new Student(value.getUserName(),value.getClassList(),value.getUser());
-                mStudentLabel.setText(newUser.getUserName());
                 makeButtons(newUser);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-<<<<<<< HEAD
-        courses.add(math);
-        courses.add(english);
-        courses.add(cs);
-
-        courses.get(1).setCourseAvailability(true);
-=======
             }
         });
 
@@ -95,7 +68,6 @@ public class StudentMain extends AppCompatActivity {
         mStudentLabel = (TextView) findViewById(R.id.student_label);
 
         //TODO Read courses from database here and student
->>>>>>> 2dea3b17863775da2f07906ee4367ddb48b68e8a
 
 
     }
@@ -103,6 +75,8 @@ public class StudentMain extends AppCompatActivity {
     public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,CodeCheck.class);
+
+        inten.putExtra("Student",newUser);
         startActivity(inten);
     }
 
@@ -128,7 +102,7 @@ public class StudentMain extends AppCompatActivity {
             dualView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             dualView.setOrientation(LinearLayout.HORIZONTAL);
 
-            Button btn= new Button(this);
+            final Button btn= new Button(this);
             final Button absenceBtn = new Button (this);
             LinearLayout.LayoutParams buttonParams =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
