@@ -194,11 +194,16 @@ ProfMain extends AppCompatActivity
 
             if (profList.get(i).getCourseAvailibility() == true)
 
+=======
+>>>>>>> parent of 4f4bb80... Fixed the database retreival, and merged with master
             {
                 btn.setBackgroundColor(Color.rgb(50, 205, 50)); //GREEN
             }
+<<<<<<< HEAD
             else
 >>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
+=======
+>>>>>>> parent of 4f4bb80... Fixed the database retreival, and merged with master
             {
                 btn.setBackgroundColor(Color.rgb(220, 220 ,220)); //GRAY
             }
