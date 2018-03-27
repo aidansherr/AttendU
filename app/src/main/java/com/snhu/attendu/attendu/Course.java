@@ -4,6 +4,7 @@ package com.snhu.attendu.attendu;
 <<<<<<< HEAD
 =======
 
+import java.io.Serializable;
 >>>>>>> 2dea3b17863775da2f07906ee4367ddb48b68e8a
 /**
  * Created by Travis on 10/11/2017.

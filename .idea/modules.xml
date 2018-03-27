@@ -5,12 +5,17 @@
       <module fileurl="file://$PROJECT_DIR$/AttendU.iml" filepath="$PROJECT_DIR$/AttendU.iml" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 4bddb3b... Revert "Fixed the database retreival, and merged with master"
 =======
       <module fileurl="file://C:\Users\tyowe\Desktop\AttendU1\AttendU1\AttendU.iml" filepath="C:\Users\tyowe\Desktop\AttendU1\AttendU1\AttendU.iml" />
       <module fileurl="file://C:\Users\Travis Guthrie\Documents\AttendU\AttendU\.idea\AttendU1.iml" filepath="C:\Users\Travis Guthrie\Documents\AttendU\AttendU\.idea\AttendU1.iml" />
 >>>>>>> 2dea3b17863775da2f07906ee4367ddb48b68e8a
+=======
+      <module fileurl="file://C:\Users\tyowe\Desktop\AttendU1\AttendU1\AttendU.iml" filepath="C:\Users\tyowe\Desktop\AttendU1\AttendU1\AttendU.iml" />
+      <module fileurl="file://C:\Users\Travis Guthrie\Documents\AttendU\AttendU\.idea\AttendU1.iml" filepath="C:\Users\Travis Guthrie\Documents\AttendU\AttendU\.idea\AttendU1.iml" />
+>>>>>>> parent of 4bddb3b... Revert "Fixed the database retreival, and merged with master"
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

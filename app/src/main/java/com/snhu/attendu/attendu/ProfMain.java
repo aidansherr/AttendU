@@ -188,7 +188,11 @@ ProfMain extends AppCompatActivity
                 btn.setBackgroundColor(Color.rgb(50, 205, 50)); //GREEN
             }
             else
+<<<<<<< HEAD
 >>>>>>> 2dea3b17863775da2f07906ee4367ddb48b68e8a
+=======
+>>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
+>>>>>>> parent of 4bddb3b... Revert "Fixed the database retreival, and merged with master"
             {
                 btn.setBackgroundColor(Color.GREEN);
             }
