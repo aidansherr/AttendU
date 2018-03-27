@@ -12,17 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +27,9 @@ public class StudentMain extends AppCompatActivity {
     private View mLayout;
     private TextView mStudentLabel;
 
-    List<Course> courses=new ArrayList<Course>();
-    Student newUser;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
+    Student newUser;
     List<Student> students = new ArrayList<>();
->>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,25 +38,9 @@ public class StudentMain extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
-<<<<<<< HEAD
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-
-        mLayout = findViewById(R.id.student_linear);
-        mStudentLabel = (TextView) findViewById(R.id.student_label);
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-        //TODO Read courses from database here and student
-=======
         Intent i= getIntent();
         newUser= (Student) i.getSerializableExtra("Student");
 
->>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
 
         databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,35 +54,12 @@ public class StudentMain extends AppCompatActivity {
 
                 makeButtons(newUser);
             }
-=======
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        mLayout = findViewById(R.id.student_linear);
-        mStudentLabel = (TextView) findViewById(R.id.student_label);
-
-        //TODO Read courses from database here and student
-
-        Course math=new Course("Math");
-        Course english=new Course("English");
-        Course cs= new Course("Lab");
-
-        courses.add(math);
-        courses.add(english);
-        courses.add(cs);
-
-        courses.get(1).setCourseAvailability(true);
-
-<<<<<<< HEAD
-
-=======
-=======
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+            }
+        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
@@ -120,35 +69,7 @@ public class StudentMain extends AppCompatActivity {
 
         //TODO Read courses from database here and student
 
-        Course math=new Course("Math");
-        Course english=new Course("English");
-        Course cs= new Course("Lab");
 
-<<<<<<< HEAD
-        courses.add(math);
-        courses.add(english);
-        courses.add(cs);
-
-        courses.get(1).setCourseAvailability(true);
-=======
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
-
-        mLayout = findViewById(R.id.student_linear);
-        mStudentLabel = (TextView) findViewById(R.id.student_label);
-
-        //TODO Read courses from database here and student
->>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
-
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-        newUser= new Student("Tyler",courses,"P");
-        mStudentLabel.setText("Tom Brady");
-
-        makeButtons();
-<<<<<<< HEAD
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
     }
 
     public void openPinWindow(View view)
@@ -160,8 +81,6 @@ public class StudentMain extends AppCompatActivity {
     }
 
     private void reportAbsence(int num)
-<<<<<<< HEAD
-<<<<<<< HEAD
     {
         //TODO add parameters to new intent, reference to class
         String courseAbName = newUser.getClassList().get(num).getClassName();
@@ -176,28 +95,6 @@ public class StudentMain extends AppCompatActivity {
     {
        LinearLayout mParentLayout = (LinearLayout) findViewById(R.id.student_linear);
         List<Course> courses=newUser.getClassList();
-=======
-    {
-=======
-    {
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-        //TODO add parameters to new intent, reference to class
-        String courseAbName = courses.get(num).getClassName();
-
-        Intent absenceIntent = new Intent(getApplicationContext(), Absence.class);
-        absenceIntent.putExtra("courseName",courseAbName);
-        startActivity(absenceIntent);
-    }
-
-
-    public void makeButtons()
-    {
-       LinearLayout mParentLayout = (LinearLayout) findViewById(R.id.student_linear);
-
-<<<<<<< HEAD
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-=======
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
         for(int i=0;i<courses.size();i++)
         {
             LinearLayout dualView = new LinearLayout(getApplicationContext());
@@ -235,27 +132,11 @@ public class StudentMain extends AppCompatActivity {
                     openPinWindow(view);
                 }
             });
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             absenceBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-=======
-
-            absenceBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
-=======
-
-            absenceBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
->>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
                     reportAbsence(absenceBtn.getId());
                 }
             });
