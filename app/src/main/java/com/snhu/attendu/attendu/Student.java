@@ -8,6 +8,19 @@ import java.util.List;
 
 public class Student extends BasicUser
 {
+<<<<<<< HEAD
+=======
+    Student()
+    {}
+
+    Student(String userName,String user,String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.user = user;
+    }
+
+>>>>>>> 2dea3b17863775da2f07906ee4367ddb48b68e8a
    Student(String userName, List<Course> courses, String user)
     {
         this.userName=userName;
