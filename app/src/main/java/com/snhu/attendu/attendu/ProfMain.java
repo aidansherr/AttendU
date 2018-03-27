@@ -115,6 +115,10 @@ ProfMain extends AppCompatActivity
             row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.MATCH_PARENT,1.0f));
             row.addView(btn);
             if (courses.get(i).getCourseAvailibility() == true)
+<<<<<<< HEAD
+=======
+>>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
+>>>>>>> parent of 4bddb3b... Revert "Fixed the database retreival, and merged with master"
             {
                 btn.setBackgroundColor(Color.GREEN);
             }

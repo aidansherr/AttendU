@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AttendU.iml" filepath="$PROJECT_DIR$/AttendU.iml" />
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 4bddb3b... Revert "Fixed the database retreival, and merged with master"
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
