@@ -34,11 +34,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -76,7 +73,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             "tom.brady@snhu.edu:b240a280af5b8e08ca06917dae3fd0f1a7fae49b:s",
             "tyler@snhu.edu:41589fdd0f4220c50eab22259d45629b5bb0848f:i"
     };
-
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -89,54 +85,39 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     public String UserLevel;
-    public AttenduUsers allUsers;
-    public String[] userInfo;
-    public String LoginUser;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LoginActivity.context = getApplicationContext();
+        setContentView(R.layout.activity_login);
+        // Set up the login form.
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        populateAutoComplete();
 
+        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                    attemptLogin();
+                    return true;
+                }
+                return false;
+            }
+        });
 
-            super.onCreate(savedInstanceState);
-            LoginActivity.context = getApplicationContext();
-            setContentView(R.layout.activity_login);
+        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptLogin();
+            }
+        });
 
-            Intent i=getIntent();
-            allUsers= (AttenduUsers) i.getSerializableExtra("AllUsers");
-            userInfo= new String[allUsers.getTotalSize()];
-            concatUserInfo(userInfo);
-
-
-                // Set up the login form.
-                mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-                populateAutoComplete();
-
-                mPasswordView = (EditText) findViewById(R.id.password);
-                mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                        if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                            attemptLogin();
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-
-                Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-                mEmailSignInButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        attemptLogin();
-                    }
-                });
-
-                mLoginFormView = findViewById(R.id.login_form);
-                mProgressView = findViewById(R.id.login_progress);
-
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
     }
-
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -371,18 +352,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
             // TODO: Check users credentials from database
-            for (String credential : userInfo)
-            {
+            for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
+                if (pieces[0].equals(mEmail.toLowerCase())) {
                     // Account exists, return true if the password matches.
                     //TODO Database check here
                     PasswordDigest pd = new PasswordDigest();
                     //return pieces[1].equals(pd.encryptPassword(mPassword));
-                    String hash=pd.encryptPassword(mPassword);
-                    if(pieces[1].equals(hash))
+                    if(pieces[1].equals(pd.encryptPassword(mPassword)))
                     {
-                        LoginUser=mEmail;
                         UserLevel=pieces[2];
                         return true;
                     }
@@ -402,7 +380,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Log.d("TEST", "The entered password: " + mPassword);
 
             // TODO: register the new account here.
-            /*
             //Consider something else
             UserLevel = "s";
             PasswordDigest pd = new PasswordDigest();
@@ -412,9 +389,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("user", newUser);
             editor.apply();
-            */
 
-            return false;
+            return true;
         }
 
         @Override
@@ -430,25 +406,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 //Returns userLevel from array needs the userLevel string to work
                     switch (UserLevel)
                     {
-                        case "s":
-                            final Student student =allUsers.getStudent(LoginUser);
-                            Student.putExtra("Student",student);
-                            startActivity(Student);
+                        case "s": startActivity(Student);
                             break;
-                        case "p":
-                            final Professor prof= allUsers.getProf(LoginUser);
-                            Professor.putExtra("Professor",prof);
-                            startActivity(Professor);
+                        case "p": startActivity(Professor);
                             break;
-                        case "a":
-                            final Admin admin= allUsers.getAdmin(LoginUser);
-                            Admin.putExtra("Admin",admin);
-                            startActivity(Admin);
+                        case "a": startActivity(Admin);
                             break;
-                        case "i":
-                            final ITUser it= allUsers.getIT(LoginUser);
-                            ITUser.putExtra("IT",it);
-                            startActivity(ITUser);
+                        case "i": startActivity(ITUser);
                             break;
                         default:
                             break;
@@ -464,45 +428,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
-        }
-
-    }
-    void concatUserInfo(String[] temp)
-    {
-
-        int count=0;
-
-        for(int i=0; i< allUsers.getAllProfs().size();i++)
-        {
-            Professor tempProf= allUsers.getAllProfs().get(i);
-            String info=tempProf.getEmail()+":"+tempProf.getPassword()+":"+tempProf.getUser();
-            temp[count]=info;
-            count++;
-
-        }
-        for(int i=0; i< allUsers.getAllStudents().size();i++)
-        {
-            Student tempStudent= allUsers.getAllStudents().get(i);
-            String info=tempStudent.getEmail()+":"+tempStudent.getPassword()+":"+tempStudent.getUser();
-            temp[count]=info;
-            count++;
-
-        }
-        for(int i=0; i< allUsers.getAllAdmins().size();i++)
-        {
-            Admin tempAdmin= allUsers.getAllAdmins().get(i);
-            String info=tempAdmin.getEmail()+":"+tempAdmin.getPassword()+":"+tempAdmin.getUser();
-            temp[count]=info;
-            count++;
-
-        }
-        for(int i=0; i< allUsers.getAllIT().size();i++)
-        {
-            ITUser tempIT= allUsers.getAllIT().get(i);
-            String info=tempIT.getEmail()+":"+tempIT.getPassword()+":"+tempIT.getUser();
-            temp[count]=info;
-            count++;
-
         }
     }
 }

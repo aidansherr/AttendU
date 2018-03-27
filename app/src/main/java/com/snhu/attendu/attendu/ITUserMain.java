@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ITUserMain extends AppCompatActivity {
 
     private Button mCreateButton;
-     ITUser newUser=new ITUser();
+    final ITUser newUser=new ITUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +28,16 @@ public class ITUserMain extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
-        Intent i= getIntent();
-        newUser= (ITUser) i.getSerializableExtra("IT");
-        databaseReference.child("IT_user").child("IT_User_ID").addValueEventListener(new ValueEventListener() {
+
+        databaseReference.child("IT_user").child("IT_User_ID").child("-L6xb8CWAoPQIk1mc9ee").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children= dataSnapshot.getChildren();
-                for (DataSnapshot child:children)
-                {
+                ITUser value = dataSnapshot.getValue(ITUser.class);
+                newUser.setUserName(value.getUserName());
+                newUser.setUserType(value.getUser());
 
 
-                }
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

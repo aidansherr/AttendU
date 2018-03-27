@@ -1,1 +1,1 @@
-include ':app', ':datePickerCustom'
+include ':app'

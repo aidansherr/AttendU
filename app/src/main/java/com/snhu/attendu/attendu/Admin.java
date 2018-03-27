@@ -11,12 +11,6 @@ public class Admin extends BasicUser
     {
         user="a";
     }
-    Admin(String userName,String user,String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.user = user;
-    }
     Admin( String newname)
     {
         newname=userName;

@@ -1,6 +1,5 @@
 package com.snhu.attendu.attendu;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,7 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class AdminMain extends AppCompatActivity {
-     Admin newUser= new Admin();
+    final Admin newUser= new Admin();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,17 +19,13 @@ public class AdminMain extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
-        Intent i= getIntent();
-        newUser= (Admin) i.getSerializableExtra("Admin");
-        databaseReference.child("Admin").child("Admin_ID").addValueEventListener(new ValueEventListener() {
+
+        databaseReference.child("Admin").child("Admin_ID").child("-L6xb8DjO2jRJKbO7HQN").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children=dataSnapshot.getChildren();
-                for (DataSnapshot child:children)
-                {
-
-                }
-
+                ITUser value = dataSnapshot.getValue(ITUser.class);
+                newUser.setUserName(value.getUserName());
+                newUser.setUserType(value.getUser());
 
             }
 

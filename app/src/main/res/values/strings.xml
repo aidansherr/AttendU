@@ -36,6 +36,7 @@
     </string-array>
 
 
+
     <!--IT Menu-->
     <string name="it_menu">IT Task Menu</string>
     <string name="create_user">Create new user</string>
@@ -63,8 +64,8 @@
     <string name="geofence_not_available">Geofence service is not available now</string>
     <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
     <string name="geofence_too_many_pending_intents">" You have provided too many PendingIntents to the addGeofences() call     "</string>
-    <string name="unknown_geofence_error">"Unknown error: the Geofence service is not available now     "</string>
-    <string name="geofence_transition_invalid_type">"Geofence transition error: invalid transition type %1$d     "</string>
+        <string name="unknown_geofence_error">"Unknown error: the Geofence service is not available now     "</string>
+        <string name="geofence_transition_invalid_type">"Geofence transition error: invalid transition type %1$d     "</string>
 
     <!-- Transition type strings -->
     <string name="geofence_transition_entered">Entered</string>
@@ -110,13 +111,6 @@
     <string name="no_selection_excuse_type">Specify an excuse</string>
     <string name="no_selection_date">Select date of absence</string>
     <string name="out_of_class_range">Not In Range Of Classroom</string>
-    <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
-    <string name="success_absence">Successfully reported absence</string>
-    <string name="unexcused">Unexcused</string>
-    <string name="emergency">Emergency</string>
-    <string name="school_related">School Related</string>
-    <string name="title_activity_get_users">GetUsersActivity</string>
 
 
 </resources>
