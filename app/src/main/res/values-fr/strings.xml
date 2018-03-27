@@ -73,5 +73,11 @@
     <string name="no_selection_excuse_type">Spécifiez une excuse</string>
     <string name="no_selection_date">Sélectionnez la date d\'absence</string>
     <string name="out_of_class_range">Pas dans la gamme de la salle de classe</string>
+    <string name="cancel">Annuler</string>
+    <string name="ok">D\'accord</string>
+    <string name="success_absence">Absence signalée avec succès</string>
+    <string name="school_related">École liée</string>
+    <string name="emergency">Urgence</string>
+    <string name="unexcused">Inexcusé</string>
 
 </resources>

@@ -73,4 +73,10 @@
     <string name="no_selection_excuse_type">Geben Sie eine Ausrede an</string>
     <string name="no_selection_date">Wählen Sie das Abwesenheitsdatum aus</string>
     <string name="out_of_class_range">Nicht im Klassenzimmer</string>
+    <string name="cancel">Stornieren</string>
+    <string name="ok">OK</string>
+    <string name="success_absence">Erfolgreich gemeldete Abwesenheit</string>
+    <string name="school_related">Schule verwandt</string>
+    <string name="emergency">Notfall</string>
+    <string name="unexcused">Unentschuldigt</string>
 </resources>

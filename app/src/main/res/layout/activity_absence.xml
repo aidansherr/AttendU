@@ -51,17 +51,17 @@
                 android:layout_marginTop="40dp"
                 android:ems="10"
                 android:text="@string/date_select"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/reason_dropdown"
                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:ems="10"
-                android:entries="@array/reason_type"
-                android:textSize="18sp"
+                android:text="@string/no_selection_excuse_type"
+                android:textSize="20sp"
                 android:prompt="@string/reason_type_prompt"/>
 
             <Button

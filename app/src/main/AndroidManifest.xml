@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".LoginActivity"
+            android:name=".GetUsersActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AdminMain" />
-        <activity android:name=".ITUserMain"></activity>
+        <activity android:name=".ITUserMain" />
         <activity android:name=".Absence" />
         <activity android:name=".IT_UserCreation" />
         <!--
@@ -75,6 +75,7 @@
 
         <service android:name=".GeofenceTransitionsIntentService" />
 
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

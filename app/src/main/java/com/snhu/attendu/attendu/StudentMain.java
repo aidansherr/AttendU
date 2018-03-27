@@ -37,14 +37,20 @@ public class StudentMain extends AppCompatActivity {
     Student newUser;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+    List<Student> students = new ArrayList<>();
+>>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         FirebaseDatabase mDatabase;
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
+<<<<<<< HEAD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 =======
@@ -58,14 +64,22 @@ public class StudentMain extends AppCompatActivity {
 <<<<<<< HEAD
 <<<<<<< HEAD
         //TODO Read courses from database here and student
+=======
+        Intent i= getIntent();
+        newUser= (Student) i.getSerializableExtra("Student");
 
-        databaseReference.child("Student").child("Student_ID").child("-L6r1wPEIM_7FxA7CFDT").addValueEventListener(new ValueEventListener() {
+>>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
+
+        databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Student value = dataSnapshot.getValue(Student.class);
+                Iterable<DataSnapshot> children=dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    Student value = child.getValue(Student.class);
+                    students.add(value);
+                }
 
-                newUser=new Student(value.getUserName(),value.getClassList(),value.getUser());
-                mStudentLabel.setText(newUser.getUserName());
                 makeButtons(newUser);
             }
 =======
@@ -110,11 +124,21 @@ public class StudentMain extends AppCompatActivity {
         Course english=new Course("English");
         Course cs= new Course("Lab");
 
+<<<<<<< HEAD
         courses.add(math);
         courses.add(english);
         courses.add(cs);
 
         courses.get(1).setCourseAvailability(true);
+=======
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_student_main);
+
+        mLayout = findViewById(R.id.student_linear);
+        mStudentLabel = (TextView) findViewById(R.id.student_label);
+
+        //TODO Read courses from database here and student
+>>>>>>> 927bb31cfb81a84bdcf79d9c60979e8d67e8c859
 
 >>>>>>> parent of 50dc79d... Merge remote-tracking branch 'origin/DatabaseWork'
         newUser= new Student("Tyler",courses,"P");
@@ -130,6 +154,8 @@ public class StudentMain extends AppCompatActivity {
     public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,CodeCheck.class);
+
+        inten.putExtra("Student",newUser);
         startActivity(inten);
     }
 
@@ -179,7 +205,7 @@ public class StudentMain extends AppCompatActivity {
             dualView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             dualView.setOrientation(LinearLayout.HORIZONTAL);
 
-            Button btn= new Button(this);
+            final Button btn= new Button(this);
             final Button absenceBtn = new Button (this);
             LinearLayout.LayoutParams buttonParams =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);

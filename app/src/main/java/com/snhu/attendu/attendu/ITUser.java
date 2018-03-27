@@ -10,6 +10,13 @@ public class ITUser extends BasicUser
     {
         user="i";
     }
+
+    ITUser(String userName,String user,String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.user = user;
+    }
     ITUser( String name)
     {
         name=userName;
