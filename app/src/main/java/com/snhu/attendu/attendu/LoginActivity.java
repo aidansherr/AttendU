@@ -443,11 +443,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         case "a":
                             final Admin admin= allUsers.getAdmin(LoginUser);
                             Admin.putExtra("Admin",admin);
+                            Admin.putExtra("allUsers", allUsers);
                             startActivity(Admin);
                             break;
                         case "i":
                             final ITUser it= allUsers.getIT(LoginUser);
                             ITUser.putExtra("IT",it);
+                            ITUser.putExtra("allUsers", allUsers);
                             startActivity(ITUser);
                             break;
                         default:

@@ -15,12 +15,14 @@ public class AttenduUsers implements Serializable
     List<Admin> allAdmins;
     List<ITUser> allIT;
 
+
     AttenduUsers()
     {
         allProfs= new ArrayList<>();
         allAdmins= new ArrayList<>();
         allIT= new ArrayList<>();
         allStudents= new ArrayList<>();
+
 
     }
     AttenduUsers(List<Professor> tp,List<Admin> ta,List<ITUser> ti,List<Student> ts)

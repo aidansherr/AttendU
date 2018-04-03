@@ -30,6 +30,7 @@ public class ITUserMain extends AppCompatActivity {
 
         Intent i= getIntent();
         newUser= (ITUser) i.getSerializableExtra("IT");
+        newUser = (ITUser) i.getSerializableExtra("allUsers");
         databaseReference.child("IT_user").child("IT_User_ID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
