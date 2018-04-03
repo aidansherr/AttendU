@@ -14,6 +14,7 @@ public class Course implements Serializable
     //SignInPin pin = new SignInPin();
     String random = "12345";
     //String random = Integer.toString(pin.GenerateCode());
+    LatLong location = new LatLong();
     public Course()
     {
 
@@ -37,7 +38,18 @@ public class Course implements Serializable
     boolean getCourseAvailibility()
     {
         return courseCheckinAvailable;
+
     }
+    void setClassLocation(int nlat, int nlng)
+    {
+        location.setLat(nlat);
+        location.setLng(nlng);
+    }
+    LatLong getClassLocation()
+    {
+        return location;
+    }
+
 
     private
 

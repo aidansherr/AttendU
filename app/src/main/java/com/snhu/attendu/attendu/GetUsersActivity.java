@@ -25,13 +25,14 @@ public class GetUsersActivity extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
-
+       // databaseReference.child("Student").child("Student_ID").child("-L72ExDIReWrL9wz8JVY").child("classList").child("0").child("location").child("lng").setValue(30);
         databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children=dataSnapshot.getChildren();
                 for (DataSnapshot child:children)
                 {
+                    String skey=child.getKey();
                     Student value = child.getValue(Student.class);
                     allUsers.addStudent(value);
 

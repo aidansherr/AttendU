@@ -64,9 +64,12 @@ public class CodeCheck extends AppCompatActivity implements
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     private static final int DEFAULT_ZOOM = 15;
-    private LatLng latLng = new LatLng(43.032710, -71.441566);
-    private final LatLng mDefaultLocation = new LatLng(43.040692, -71.452886);
+    //private LatLng latLng = new LatLng(43.032710, -71.441566);
+    private final LatLng mDefaultLocation = new LatLng(43.040692, -31.452886);
     private Location mLastKnownLocation;
+    Course studentCourse;
+    LatLong courseLocation;
+    LatLng courseLatlng;
 
     private boolean mLocationPermissionGranted;
     /**
@@ -135,6 +138,12 @@ public class CodeCheck extends AppCompatActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent i= getIntent();
+         studentCourse= (Course) i.getSerializableExtra("Class");
+         courseLocation=studentCourse.getClassLocation();
+         courseLatlng=new LatLng(courseLocation.getLat(),courseLocation.getLng());
+
+
         setContentView(R.layout.activity_code_check);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -173,9 +182,9 @@ public class CodeCheck extends AppCompatActivity implements
         mMap1 = googleMap;
 
         //TODO load in geofence data from database
-        mMap1.addMarker(new MarkerOptions().position(latLng)).setTitle("Class");
+        mMap1.addMarker(new MarkerOptions().position(courseLatlng)).setTitle("Class");
         circle = mMap1.addCircle(new CircleOptions()
-                .center(latLng)
+                .center(courseLatlng)
                 .radius(20)
                 .strokeColor(Color.DKGRAY)
                 .strokeWidth(10)
@@ -355,8 +364,8 @@ public class CodeCheck extends AppCompatActivity implements
 
                 // Set the circular region of this geofence.
                 .setCircularRegion(
-                        latLng.latitude,
-                        latLng.longitude,
+                        courseLatlng.latitude,
+                        courseLatlng.longitude,
                         1609
                 )
 

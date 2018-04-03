@@ -38,34 +38,19 @@ public class StudentMain extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
-        Intent i= getIntent();
-        newUser= (Student) i.getSerializableExtra("Student");
 
 
-        databaseReference.child("Student").child("Student_ID").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children=dataSnapshot.getChildren();
-                for (DataSnapshot child:children)
-                {
-                    Student value = child.getValue(Student.class);
-                    students.add(value);
-                }
-
-                makeButtons(newUser);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
 
         mLayout = findViewById(R.id.student_linear);
         mStudentLabel = (TextView) findViewById(R.id.student_label);
+
+        Intent i= getIntent();
+        newUser= (Student) i.getSerializableExtra("Student");
+        makeButtons(newUser);
+
 
         //TODO Read courses from database here and student
 
@@ -75,7 +60,8 @@ public class StudentMain extends AppCompatActivity {
     public void openPinWindow(View view)
     {
         Intent inten= new Intent(this,CodeCheck.class);
-
+        Course temp=newUser.getClassList().get(view.getId());
+        inten.putExtra("Class",temp);
         inten.putExtra("Student",newUser);
         startActivity(inten);
     }
