@@ -67,7 +67,7 @@ public class AttenduUsers implements Serializable
     {
         return allIT;
     }
-
+//create if statements for each user.  if user != null then return false else return true
     Professor getProf(String name)
     {
         for( int i=0; i<allProfs.size();i++)
@@ -121,6 +121,30 @@ public class AttenduUsers implements Serializable
         }
         return null;
     }
+
+    boolean checkEmail(String name)
+    {
+        if (getProf(name) != null)
+        {
+            return false;
+        }
+        if(getStudent(name)!= null)
+        {
+            return false;
+        }
+        if(getAdmin(name) != null)
+        {
+            return false;
+        }
+        if(getIT(name) != null)
+        {
+            return false;
+        }
+        return true;
+
+    }
+
+
     int getTotalSize()
     {
         int sum=0;
