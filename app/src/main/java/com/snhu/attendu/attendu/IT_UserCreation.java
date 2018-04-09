@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -75,13 +76,13 @@ public class IT_UserCreation extends AppCompatActivity {
         });
     }
 
-    private void createUser(){
+    private void createUser() {
 
         boolean cancel = false;
         View focusView = null;
 
-        PasswordDigest pd= new PasswordDigest();
-        TextView dropdownError = (TextView)mDropdown.getSelectedView();
+        PasswordDigest pd = new PasswordDigest();
+        TextView dropdownError = (TextView) mDropdown.getSelectedView();
 
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -98,7 +99,7 @@ public class IT_UserCreation extends AppCompatActivity {
             focusView = mPasswordView;
             cancel = true;
             mPasswordView.setText("");
-        } else if (TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
@@ -115,7 +116,7 @@ public class IT_UserCreation extends AppCompatActivity {
             cancel = true;
         }
 
-        if(mDropdown.getSelectedItemPosition() == 0) {
+        if (mDropdown.getSelectedItemPosition() == 0) {
             dropdownError.setError(getString(R.string.no_selection_user_type));
             focusView = dropdownError;
             cancel = true;
@@ -132,46 +133,60 @@ public class IT_UserCreation extends AppCompatActivity {
             //email, password encrypted, typeofUser
 
             FirebaseDatabase mDatabase;
-            mDatabase= FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
-            switch (typeOfUser)
-            {
-                case "Student":
-                    Student newUser1= new Student(name,"s",email,passwordEncrypted);
-                    databaseReference.child("Student").child("Student_ID").push().setValue(newUser1);
-                    break;
-                case "Professor":
-                    Professor newUser2= new Professor(name,"p",email,passwordEncrypted);
-                    databaseReference.child("Professor").child("Professor_ID").push().setValue(newUser2);
-                    break;
-                case "Admin":
-                    Admin newUser3= new Admin(name,"a",email,passwordEncrypted);
-                    databaseReference.child("Admin").child("Admin_ID").push().setValue(newUser3);
-                    break;
-                case "IT":
-                    ITUser newUser4= new ITUser(name,"i",email,passwordEncrypted);
-                    databaseReference.child("IT_User").child("IT_User_ID").push().setValue(newUser4);
-                    break;
-                default:
-                    break;
+            mDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            Context context = getApplicationContext();
+            CharSequence text = "Username already exists";
+
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+
+
+            AttenduUsers allUsers = new AttenduUsers();
+            if (allUsers.checkEmail((name))) {
+                switch (typeOfUser) {
+                    case "Student":
+                        Student newUser1 = new Student(name, "s", email, passwordEncrypted);
+                        databaseReference.child("Student").child("Student_ID").push().setValue(newUser1);
+                        break;
+                    case "Professor":
+                        Professor newUser2 = new Professor(name, "p", email, passwordEncrypted);
+                        databaseReference.child("Professor").child("Professor_ID").push().setValue(newUser2);
+                        break;
+                    case "Admin":
+                        Admin newUser3 = new Admin(name, "a", email, passwordEncrypted);
+                        databaseReference.child("Admin").child("Admin_ID").push().setValue(newUser3);
+                        break;
+                    case "IT":
+                        ITUser newUser4 = new ITUser(name, "i", email, passwordEncrypted);
+                        databaseReference.child("IT_User").child("IT_User_ID").push().setValue(newUser4);
+                        break;
+                    default:
+                        break;
+
+
+                }
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(IT_UserCreation.this);
+                builder.setTitle("Succsesful");
+                builder.setMessage("User created");
+                builder.setNeutralButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(IT_UserCreation.this, ITUserMain.class);
+                        startActivity(i);
+                    }
+                }).create().show();
+
+                Intent i = new Intent(IT_UserCreation.this, GetUsersActivity.class);
+                startActivity(i);
+
+            } else {
+                toast.show();
             }
 
         }
-        AlertDialog.Builder builder= new AlertDialog.Builder(IT_UserCreation.this);
-        builder.setTitle("Succsesful");
-        builder.setMessage("User created");
-        builder.setNeutralButton("Exit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                Intent i= new Intent(IT_UserCreation.this,ITUserMain.class);
-                startActivity(i);
-            }
-        }).create().show();
-
-        Intent i = new Intent(IT_UserCreation.this, GetUsersActivity.class);
-        startActivity(i);
-
     }
 
     private boolean isEmailValid(String email) {

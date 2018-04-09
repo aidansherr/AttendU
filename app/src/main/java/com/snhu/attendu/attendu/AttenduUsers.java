@@ -119,6 +119,31 @@ public class AttenduUsers implements Serializable
         }
         return null;
     }
+
+    boolean checkEmail(String name)
+    {
+        if (getProf(name) != null)
+        {
+            return false;
+        }
+        if(getStudent(name)!= null)
+        {
+            return false;
+        }
+        if(getAdmin(name) != null)
+        {
+            return false;
+        }
+        if(getIT(name) != null)
+        {
+            return false;
+        }
+        return true;
+
+    }
+
+
+
     int getTotalSize()
     {
         int sum=0;
