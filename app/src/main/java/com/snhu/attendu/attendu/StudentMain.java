@@ -29,7 +29,7 @@ public class StudentMain extends AppCompatActivity {
 
 
     Student newUser;
-    List<Student> students = new ArrayList<>();
+    Attendance studentAttendance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,17 +42,61 @@ public class StudentMain extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
-
-        mLayout = findViewById(R.id.student_linear);
-        mStudentLabel = (TextView) findViewById(R.id.student_label);
 
         Intent i= getIntent();
         newUser= (Student) i.getSerializableExtra("Student");
+        final List<Course> allCourses= new ArrayList<Course>();
+        //studentAttendance= new Attendance(newUser.getEmail(),"4/5/2018");
+
+
+        databaseReference.child("Course").child("CourseID").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    Course value=child.getValue(Course.class);
+                    allCourses.add(value);
+                }
+
+                for(int i=0;i<allCourses.size();i++)
+                {
+                    long temp2=allCourses.get(i).getClassStartedTime();
+                    for(int j=0;j<newUser.getClassList().size();j++)
+                    {
+                        if(newUser.getClassList().get(j).getClassName().equals(allCourses.get(i).getClassName()))
+                        {
+
+                            newUser.getClassList().get(j).setClassStartedTime(temp2);
+
+                        }
+                    }
+
+                }
+
+                }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+
+                    }
+        });
+
+
+                setContentView(R.layout.activity_student_main);
+        //
+                mLayout = findViewById(R.id.student_linear);
+                mStudentLabel = (TextView) findViewById(R.id.student_label);
         makeButtons(newUser);
 
-
-        //TODO Read courses from database here and student
+        //
+        //
+        //
+        //
+        //
 
 
     }
@@ -61,8 +105,10 @@ public class StudentMain extends AppCompatActivity {
     {
         Intent inten= new Intent(this,CodeCheck.class);
         Course temp=newUser.getClassList().get(view.getId());
+        long t=temp.getClassStartedTime();
         inten.putExtra("Class",temp);
         inten.putExtra("Student",newUser);
+        inten.putExtra("Attendance",studentAttendance);
         startActivity(inten);
     }
 
@@ -73,6 +119,7 @@ public class StudentMain extends AppCompatActivity {
 
         Intent absenceIntent = new Intent(getApplicationContext(), Absence.class);
         absenceIntent.putExtra("courseName",courseAbName);
+        absenceIntent.putExtra("Attendance",studentAttendance);
         startActivity(absenceIntent);
     }
 

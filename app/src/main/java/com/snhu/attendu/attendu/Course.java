@@ -15,6 +15,9 @@ public class Course implements Serializable
     String random = "12345";
     //String random = Integer.toString(pin.GenerateCode());
     LatLong location = new LatLong();
+    long classStartedTime;
+    String classKey;
+
     public Course()
     {
 
@@ -49,6 +52,23 @@ public class Course implements Serializable
     {
         return location;
     }
+    long getClassStartedTime()
+    {
+        return classStartedTime;
+    }
+    void setClassStartedTime(long startTime)
+    {
+        classStartedTime=startTime;
+    }
+    String getClassKey()
+    {
+        return classKey;
+    }
+    void setClassKey(String nkey)
+    {
+        classKey=nkey;
+    }
+
 
 
     private

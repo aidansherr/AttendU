@@ -30,6 +30,7 @@ public class Absence extends AppCompatActivity{
     private Calendar calendar;
     private Button mSubmitButton;
     private View mAbsenceFormView;
+    Attendance studentAttendance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -38,6 +39,7 @@ public class Absence extends AppCompatActivity{
 
         Intent prevIntent = getIntent(); // gets the previously created intent
         String courseName = prevIntent.getStringExtra("courseName");
+        studentAttendance= (Attendance) prevIntent.getSerializableExtra("Attendance");
 
         mAbsenceFormView = findViewById(R.id.absence_form);
         mCourseLabel = (TextView) findViewById(R.id.course_name_label);
@@ -120,6 +122,7 @@ public class Absence extends AppCompatActivity{
         } else {
            //show success message
             //TODO show success message and switch back to activity
+
 
             //TODO Write absence to database
         }
