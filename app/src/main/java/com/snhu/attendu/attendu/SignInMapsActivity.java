@@ -27,6 +27,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.Random;
@@ -52,10 +54,21 @@ public class SignInMapsActivity extends AppCompatActivity implements
 
 
     TextView text;
+    Course selectCourse;
+    FirebaseDatabase mDatabase;
+    DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i= getIntent();
+        selectCourse= (Course) i.getSerializableExtra("Course");
+
+
+        mDatabase= FirebaseDatabase.getInstance();
+         databaseReference=FirebaseDatabase.getInstance().getReference();
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         setContentView(R.layout.activity_sign_in_maps);
 
@@ -90,6 +103,8 @@ public class SignInMapsActivity extends AppCompatActivity implements
 
     public void dropPin(final View view) {
         try {
+            long startTime=System.currentTimeMillis();
+            databaseReference.child("Course").child("CourseID").child(selectCourse.getClassKey()).child("classStartedTime").setValue(startTime);
             if(mLocationPermissionGranted)
             {
                 getDeviceLocation(); //Get most current location for pin drop

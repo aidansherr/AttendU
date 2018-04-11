@@ -42,7 +42,7 @@ ProfMain extends AppCompatActivity
     {
         FirebaseDatabase mDatabase;
         mDatabase= FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -61,6 +61,8 @@ ProfMain extends AppCompatActivity
                 }
 
                 makeButtons(newUser);
+
+
             }
 
             @Override
@@ -82,7 +84,9 @@ ProfMain extends AppCompatActivity
     }
     public void openPinWindow(View view)
     {
+        Course temp=newUser.getClassList().get(view.getId());
         Intent inten= new Intent(this,SignInMapsActivity.class);
+        inten.putExtra("Course",temp);
         startActivity(inten);
     }
 
