@@ -70,7 +70,7 @@ public class StudentMain extends AppCompatActivity {
                         {
 
                             newUser.getClassList().get(j).setClassStartedTime(temp2);
-                            
+
                         }
                     }
 
