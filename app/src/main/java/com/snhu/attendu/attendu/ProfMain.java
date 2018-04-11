@@ -60,7 +60,7 @@ ProfMain extends AppCompatActivity
 
                 }
 
-                makeButtons(newUser);
+
 
 
             }
@@ -73,11 +73,50 @@ ProfMain extends AppCompatActivity
 
 
 
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_prof_main);
         mLayout = findViewById(R.id.prof_linear);
         mProfLabel = (TextView) findViewById(R.id.prof_label);
+        makeButtons(newUser);
+
+        final List<Course> allCourses= new ArrayList<Course>();
+        databaseReference.child("Course").child("CourseID").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child:children)
+                {
+                    Course value=child.getValue(Course.class);
+                    allCourses.add(value);
+                }
+
+                for(int i=0;i<allCourses.size();i++)
+                {
+                    long temp2=allCourses.get(i).getClassStartedTime();
+                    for(int j=0;j<newUser.getClassList().size();j++)
+                    {
+                        if(newUser.getClassList().get(j).getClassName().equals(allCourses.get(i).getClassName()))
+                        {
+
+                            newUser.getClassList().get(j).setClassStartedTime(temp2);
+
+                        }
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+            }
+        });
 
 
 
