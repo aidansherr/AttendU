@@ -1,5 +1,5 @@
 package com.snhu.attendu.attendu;
-
+import java.io.Serializable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,7 +14,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 
 
-public class SignInPin extends AppCompatActivity
+public class SignInPin extends AppCompatActivity implements Serializable
 {
     TextView text;
     @Override

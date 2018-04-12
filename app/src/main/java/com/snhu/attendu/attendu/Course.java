@@ -3,6 +3,8 @@ package com.snhu.attendu.attendu;
 
 
 import java.io.Serializable;
+import java.util.Random;
+
 /**
  * Created by Travis on 10/11/2017.
  */
@@ -11,7 +13,7 @@ public class Course implements Serializable
 {
 
     public
-    //SignInPin pin = new SignInPin();
+
     String random = "12345";
     //String random = Integer.toString(pin.GenerateCode());
     LatLong location = new LatLong();
@@ -68,6 +70,23 @@ public class Course implements Serializable
     {
         classKey=nkey;
     }
+    String generatePin()
+    {
+        String pin="";
+        int min= 10000;
+        int max = 99999;
+
+
+        Random rnd = new Random();
+        int Code= rnd.nextInt(max-min+1)+min;
+        pin=Integer.toString(Code);
+        return pin;
+    }
+    void setPin(String np)
+    {
+        random=np;
+    }
+
 
 
 
