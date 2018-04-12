@@ -104,7 +104,9 @@ public class SignInMapsActivity extends AppCompatActivity implements
     public void dropPin(final View view) {
         try {
             long startTime=System.currentTimeMillis();
+
             databaseReference.child("Course").child("CourseID").child(selectCourse.getClassKey()).child("classStartedTime").setValue(startTime);
+
             if(mLocationPermissionGranted)
             {
                 getDeviceLocation(); //Get most current location for pin drop
@@ -151,6 +153,8 @@ public class SignInMapsActivity extends AppCompatActivity implements
                 int randomNumber = generateCode();
                 String random = Integer.toString(randomNumber);// casts it as a string for the TextView
                 text.setText(random);
+                selectCourse.setPin(random);
+                databaseReference.child("Course").child("CourseID").child(selectCourse.getClassKey()).child("random").setValue(random);
                 pinDropped = true;
             }
 
